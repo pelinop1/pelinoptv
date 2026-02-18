@@ -128,6 +128,54 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- Info Card Styles --- */
+        .info-card {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .info-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .info-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9rem;
+        }
+
+        .rating-badge {
+            background: #f5c518; /* IMDb Yellow */
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 0.8rem;
+        }
+
+        .rating-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
         /* --- Landing Page Styles --- */
         .landing-container {
             height: calc(85vh - 100px);
@@ -176,7 +224,7 @@
             letter-spacing: 2px;
         }
 
-        /* --- Watchlist Section (Bullet List) --- */
+        /* --- Watchlist Section --- */
         .watchlist-container {
             display: flex;
             flex-direction: column;
@@ -218,7 +266,7 @@
 
         /* --- Anime Detail Section --- */
         .anime-header {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .anime-header h1 {
@@ -407,6 +455,7 @@
             main { margin-top: 160px; }
             .aot-title { font-size: 1.8rem; }
             .landing-title { font-size: 2.5rem; }
+            .info-card { padding: 1rem; }
         }
     </style>
 </head>
@@ -437,10 +486,31 @@
             </div>
         </section>
 
-        <!-- Plastic Memories -->
+        <!-- Plastic Memories Section -->
         <section id="plastic-memories" class="section">
-            <div class="anime-header"><h1>Plastic Memories</h1></div>
-            <!-- This container will be populated by JavaScript -->
+            <div class="anime-header">
+                <h1>Plastic Memories (2015)</h1>
+            </div>
+
+            <!-- New Information Area -->
+            <div class="info-card">
+                <div class="info-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-color);">
+                        <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"></path>
+                        <path d="M12 8v4"></path>
+                        <path d="M12 16h.01"></path>
+                    </svg>
+                    Hakkında
+                </div>
+                <p class="info-description">
+                    Hikaye yakın bir gelecekte dünyanın dört bir tarafına yayılan androidlerin insanlar gibi göründüğü zamanda geçiyor. Androidleri üreten şirket SA, Giftia adında yeni bir tür android üretir. Giftia'ların özelliği ise şimdiye kadar içinde en çok duygu barından androidler olmasıdır. Ama bu androidlerin bir hizmet sınırı vardır. Bu sınır dolduğunda androidler garip davranmaya başlar. Bu nedenle SA şirketi süresi dolan androidleri geri almak için bir takıma ihtiyaç duyar. SA'da çalışmaya başlayan yeni işçi Tsukasa Mizugaki bir takım kurması ve diğer androidleri bulup getirmesi gerekecektir.
+                </p>
+                <div class="info-meta">
+                    <span class="rating-badge">IMDb</span>
+                    <span class="rating-value">7.4 / 10</span>
+                </div>
+            </div>
+
             <div class="episode-grid" id="episodeGrid"></div>
         </section>
 
@@ -478,7 +548,7 @@
         </div>
     </div>
 
-    <div id="toast">Episode not available yet.</div>
+    <div id="toast">Bölüm henüz mevcut değil.</div>
 
     <script>
         /**
@@ -492,12 +562,12 @@
             { title: "Episode 5", source: "https://yoroichi.asia/file/tau-video/eca49014-b7f9-425a-bb52-7f87f21b6f14.mp4" },
             { title: "Episode 6", source: "https://kamadotanjiro.asia/file/tau-video/a6614a17-ca6f-4fa9-896c-f9aa4ac139be.mp4" },
             { title: "Episode 7", source: "https://yurexa-1.asia/file/tau-video/d1ec1ab1-220d-452f-bc3c-88f9c67ba280.mp4" },
-            { title: "Episode 8", source: "" },
-            { title: "Episode 9", source: "" },
-            { title: "Episode 10", source: "" },
-            { title: "Episode 11", source: "" },
-            { title: "Episode 12", source: "" },
-            { title: "Episode 13", source: "" }
+            { title: "Episode 8", source: "https://nezukami.cfd/file/tau-video/a05fa9e9-e80d-4cb8-a70b-080bf676310d.mp4" },
+            { title: "Episode 9", source: "https://misakina.asia/file/tau-video/27fd1e22-69dc-4906-b003-c0f080af860b.mp4" },
+            { title: "Episode 10", source: "https://misakina.cyou/file/tau-video/b74857cb-0a84-4bb0-bc36-bfdc183fbf05.mp4" },
+            { title: "Episode 11", source: "https://nozume-1.asia/file/tau-video/ffcd4b44-875f-44de-baf7-95f422b31efe.mp4" },
+            { title: "Episode 12", source: "https://meisura-1.asia/file/tau-video/2046e151-b6ca-44ac-ac03-748d4f6af6df.mp4" },
+            { title: "Episode 13", source: "https://kyanori-4.asia/file/tau-video/d0e98059-0f87-44cc-a959-34602bd201e8.mp4" }
         ];
 
         const episodeGrid = document.getElementById('episodeGrid');
@@ -530,7 +600,7 @@
                     if (ep.source && ep.source.trim() !== "") {
                         openVideo(ep.source);
                     } else {
-                        showToast("Episode not available yet.");
+                        showToast("Bölüm henüz mevcut değil.");
                     }
                 });
                 episodeGrid.appendChild(card);
@@ -551,7 +621,7 @@
             videoPlayer.load();
             videoModal.style.display = 'flex';
             setTimeout(() => { videoModal.classList.add('active'); }, 10);
-            videoPlayer.play().catch(e => console.log("Autoplay blocked"));
+            videoPlayer.play().catch(e => console.log("Oynatma engellendi"));
             document.body.style.overflow = 'hidden'; 
         }
 
@@ -596,4 +666,3 @@
     </script>
 </body>
 </html>
-

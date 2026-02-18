@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,30 +37,39 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 1rem 5%;
+            padding: 0.8rem 5%;
             background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
             backdrop-filter: blur(5px);
-            transition: background var(--transition-speed);
+            transition: background var(--transition-speed), padding var(--transition-speed);
         }
 
         header.scrolled {
             background: rgba(10, 10, 10, 0.95);
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 0.5rem 5%;
         }
 
-        .logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            cursor: pointer;
+        .logo-container {
+            display: flex;
+            align-items: center;
             text-decoration: none;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            height: 50px; 
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(229, 9, 20, 0.4));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .logo-img {
+            transform: scale(1.05);
         }
 
         nav {
@@ -163,7 +172,7 @@
         }
 
         .rating-badge {
-            background: #f5c518; /* IMDb Yellow */
+            background: #f5c518;
             color: #000;
             padding: 2px 8px;
             border-radius: 4px;
@@ -178,7 +187,7 @@
 
         /* --- Landing Page Styles --- */
         .landing-container {
-            height: calc(85vh - 100px);
+            height: calc(80vh - 100px);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -190,11 +199,14 @@
             font-family: 'Poppins', sans-serif;
             font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 800;
-            background: linear-gradient(to bottom, #fff, #999);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
             margin-bottom: 1rem;
             letter-spacing: -2px;
+        }
+
+        .landing-title span {
+            color: var(--accent-color);
+            text-shadow: 0 0 20px rgba(229, 9, 20, 0.4);
         }
 
         .landing-subtitle {
@@ -226,19 +238,20 @@
 
         /* --- Watchlist Section --- */
         .watchlist-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 60vh;
-            text-align: left;
+            padding-top: 2rem;
+        }
+
+        .watchlist-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-family: 'Poppins', sans-serif;
         }
 
         .anime-list {
             list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
         }
 
         .anime-list li {
@@ -247,24 +260,28 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-weight: 400;
-            transition: color 0.2s;
+            padding: 1rem;
+            background: var(--surface-color);
+            border-radius: 8px;
+            transition: all 0.2s;
         }
 
         .anime-list li:hover {
             color: var(--text-primary);
+            transform: translateX(5px);
+            background: #252525;
         }
 
         .anime-list li::before {
             content: '';
-            width: 5px;
-            height: 5px;
+            width: 8px;
+            height: 8px;
             background-color: var(--accent-color);
             border-radius: 50%;
             flex-shrink: 0;
         }
 
-        /* --- Anime Detail Section --- */
+        /* --- Episode Grid --- */
         .anime-header {
             margin-bottom: 2rem;
         }
@@ -275,7 +292,6 @@
             margin-bottom: 0.5rem;
         }
 
-        /* --- Grid Layout --- */
         .episode-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -307,10 +323,10 @@
         }
 
         .thumbnail-container::before {
-            content: 'Episode';
+            content: 'PELİNOP TV';
             position: absolute;
             color: rgba(255,255,255,0.03);
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: 900;
         }
 
@@ -360,7 +376,7 @@
             color: var(--text-primary);
         }
 
-        /* --- MODAL SYSTEM --- */
+        /* --- Modal --- */
         .modal {
             position: fixed;
             top: 0;
@@ -372,8 +388,8 @@
             display: none; 
             align-items: center;
             justify-content: center;
-            transition: opacity 0.3s ease;
             opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .modal.active {
@@ -386,7 +402,6 @@
             max-width: 1100px;
             position: relative;
             background: #000;
-            line-height: 0;
         }
 
         .close-modal {
@@ -413,10 +428,9 @@
             max-height: 85vh;
             display: block;
             outline: none;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
         }
 
-        /* --- Toast Notification --- */
+        /* --- Toast --- */
         #toast {
             position: fixed;
             bottom: 30px;
@@ -441,28 +455,30 @@
         /* --- Responsive --- */
         @media (max-width: 768px) {
             header {
-                flex-direction: column;
-                padding: 1rem;
-                gap: 1rem;
-                background: rgba(10, 10, 10, 0.95);
+                padding: 0.8rem 1rem;
+                background: rgba(10, 10, 10, 0.98);
             }
+            .logo-img { height: 40px; }
             nav {
-                gap: 1rem;
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
+                gap: 0.8rem;
             }
-            main { margin-top: 160px; }
-            .aot-title { font-size: 1.8rem; }
-            .landing-title { font-size: 2.5rem; }
-            .info-card { padding: 1rem; }
+            .nav-link { font-size: 0.75rem; }
+            main { margin-top: 80px; }
+            .anime-list { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            nav { gap: 0.5rem; }
+            .logo-img { height: 35px; }
         }
     </style>
 </head>
 <body>
 
     <header id="mainHeader">
-        <a href="#" class="logo" onclick="switchSection('home', null)">PelinopTV</a>
+        <div class="logo-container" onclick="switchSection('home', null)">
+            <img src="https://fontmeme.com/permalink/260218/df7d552c.png" alt="PelinopTV Logo" class="logo-img">
+        </div>
         <nav>
             <button class="nav-link" onclick="switchSection('watched', this)">İzlenenler</button>
             <button class="nav-link" onclick="switchSection('plastic-memories', this)">Plastic Memories</button>
@@ -474,7 +490,7 @@
         <!-- Home Page -->
         <section id="home" class="section active">
             <div class="landing-container">
-                <h1 class="landing-title">Welcome to PelinopTV</h1>
+                <h1 class="landing-title">Welcome to <span>Pelinflix</span></h1>
                 <p class="landing-subtitle">Dayı anime izlemeye başladım.</p>
             </div>
         </section>
@@ -483,16 +499,16 @@
         <section id="watched" class="section">
             <div class="aot-container">
                 <h2 class="aot-title">Attack on Titan</h2>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">Bitirildi.</p>
             </div>
         </section>
 
-        <!-- Plastic Memories Section -->
+        <!-- Plastic Memories -->
         <section id="plastic-memories" class="section">
             <div class="anime-header">
                 <h1>Plastic Memories (2015)</h1>
             </div>
 
-            <!-- New Information Area -->
             <div class="info-card">
                 <div class="info-title">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-color);">
@@ -517,6 +533,7 @@
         <!-- İzlenecekler -->
         <section id="watchlist" class="section">
             <div class="watchlist-container">
+                <h2 class="watchlist-title">Sıradaki Maceralar</h2>
                 <ul class="anime-list">
                     <li>Plastic Memories</li>
                     <li>Bleach</li>
@@ -543,7 +560,6 @@
             <button class="close-modal" id="closeBtn">&times;</button>
             <video id="player" controls playsinline crossorigin="anonymous">
                 <source src="" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
         </div>
     </div>
@@ -551,23 +567,20 @@
     <div id="toast">Bölüm henüz mevcut değil.</div>
 
     <script>
-        /**
-         * EPISODE CONFIGURATION
-         */
         const plasticMemoriesEpisodes = [
-            { title: "Episode 1", source: "https://kyanori-2.asia/file/tau-video/1b9166da-9bf1-4ae4-a560-3fe772c5840b.mp4" },
-            { title: "Episode 2", source: "https://renjiabari.asia/file/tau-video/331712cd-337f-4804-bf5b-8319ce500607.mp4" },
-            { title: "Episode 3", source: "https://rikafurude.asia/file/tau-video/1f781022-cbe4-4814-b61f-9fd0ec200a0d.mp4" },
-            { title: "Episode 4", source: "https://misakina.icu/file/tau-video/cee867bb-0c83-4e10-8b9e-be4931253f85.mp4" },
-            { title: "Episode 5", source: "https://yoroichi.asia/file/tau-video/eca49014-b7f9-425a-bb52-7f87f21b6f14.mp4" },
-            { title: "Episode 6", source: "https://kamadotanjiro.asia/file/tau-video/a6614a17-ca6f-4fa9-896c-f9aa4ac139be.mp4" },
-            { title: "Episode 7", source: "https://yurexa-1.asia/file/tau-video/d1ec1ab1-220d-452f-bc3c-88f9c67ba280.mp4" },
-            { title: "Episode 8", source: "https://nezukami.cfd/file/tau-video/a05fa9e9-e80d-4cb8-a70b-080bf676310d.mp4" },
-            { title: "Episode 9", source: "https://misakina.asia/file/tau-video/27fd1e22-69dc-4906-b003-c0f080af860b.mp4" },
-            { title: "Episode 10", source: "https://misakina.cyou/file/tau-video/b74857cb-0a84-4bb0-bc36-bfdc183fbf05.mp4" },
-            { title: "Episode 11", source: "https://nozume-1.asia/file/tau-video/ffcd4b44-875f-44de-baf7-95f422b31efe.mp4" },
-            { title: "Episode 12", source: "https://meisura-1.asia/file/tau-video/2046e151-b6ca-44ac-ac03-748d4f6af6df.mp4" },
-            { title: "Episode 13", source: "https://kyanori-4.asia/file/tau-video/d0e98059-0f87-44cc-a959-34602bd201e8.mp4" }
+            { title: "Bölüm 1", source: "https://kyanori-2.asia/file/tau-video/1b9166da-9bf1-4ae4-a560-3fe772c5840b.mp4" },
+            { title: "Bölüm 2", source: "https://renjiabari.asia/file/tau-video/331712cd-337f-4804-bf5b-8319ce500607.mp4" },
+            { title: "Bölüm 3", source: "https://rikafurude.asia/file/tau-video/1f781022-cbe4-4814-b61f-9fd0ec200a0d.mp4" },
+            { title: "Bölüm 4", source: "https://misakina.icu/file/tau-video/cee867bb-0c83-4e10-8b9e-be4931253f85.mp4" },
+            { title: "Bölüm 5", source: "https://yoroichi.asia/file/tau-video/eca49014-b7f9-425a-bb52-7f87f21b6f14.mp4" },
+            { title: "Bölüm 6", source: "https://kamadotanjiro.asia/file/tau-video/a6614a17-ca6f-4fa9-896c-f9aa4ac139be.mp4" },
+            { title: "Bölüm 7", source: "https://yurexa-1.asia/file/tau-video/d1ec1ab1-220d-452f-bc3c-88f9c67ba280.mp4" },
+            { title: "Bölüm 8", source: "https://nezukami.cfd/file/tau-video/a05fa9e9-e80d-4cb8-a70b-080bf676310d.mp4" },
+            { title: "Bölüm 9", source: "https://misakina.asia/file/tau-video/27fd1e22-69dc-4906-b003-c0f080af860b.mp4" },
+            { title: "Bölüm 10", source: "https://misakina.cyou/file/tau-video/b74857cb-0a84-4bb0-bc36-bfdc183fbf05.mp4" },
+            { title: "Bölüm 11", source: "https://nozume-1.asia/file/tau-video/ffcd4b44-875f-44de-baf7-95f422b31efe.mp4" },
+            { title: "Bölüm 12", source: "https://meisura-1.asia/file/tau-video/2046e151-b6ca-44ac-ac03-748d4f6af6df.mp4" },
+            { title: "Bölüm 13", source: "https://kyanori-4.asia/file/tau-video/d0e98059-0f87-44cc-a959-34602bd201e8.mp4" }
         ];
 
         const episodeGrid = document.getElementById('episodeGrid');
@@ -610,9 +623,11 @@
         function switchSection(sectionId, element) {
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             if (element) element.classList.add('active');
+            
             document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
             const targetSection = document.getElementById(sectionId);
             if (targetSection) targetSection.classList.add('active');
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -621,12 +636,11 @@
             videoPlayer.load();
             videoModal.style.display = 'flex';
             setTimeout(() => { videoModal.classList.add('active'); }, 10);
-            videoPlayer.play().catch(e => console.log("Oynatma engellendi"));
+            videoPlayer.play().catch(e => console.log("Auto-play blocked"));
             document.body.style.overflow = 'hidden'; 
         }
 
         function closeModal() {
-            if (document.fullscreenElement) { document.exitFullscreen(); }
             videoModal.classList.remove('active');
             videoPlayer.pause();
             setTimeout(() => {
@@ -658,10 +672,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             initGrid();
-            document.querySelector('.logo').addEventListener('click', (e) => {
-                e.preventDefault();
-                switchSection('home', null);
-            });
         });
     </script>
 </body>

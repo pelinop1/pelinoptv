@@ -157,7 +157,7 @@
             text-transform: uppercase;
         }
 
-        /* --- Watched Section (AOT Adjusted) --- */
+        /* --- Watched Section --- */
         .aot-container {
             display: flex;
             flex-direction: column;
@@ -426,7 +426,7 @@
         <section id="home" class="section active">
             <div class="landing-container">
                 <h1 class="landing-title">Welcome to PelinopTV</h1>
-                <p class="landing-subtitle">Your private anime archive.</p>
+                <p class="landing-subtitle">Dayı anime izlemeye başladım.</p>
             </div>
         </section>
 
@@ -448,16 +448,20 @@
         <section id="watchlist" class="section">
             <div class="watchlist-container">
                 <ul class="anime-list">
-                    <li>Anime 1</li>
-                    <li>Anime 2</li>
-                    <li>Anime 3</li>
-                    <li>Anime 4</li>
-                    <li>Anime 5</li>
-                    <li>Anime 6</li>
-                    <li>Anime 7</li>
-                    <li>Anime 8</li>
-                    <li>Anime 9</li>
-                    <li>Anime 10</li>
+                    <li>Plastic Memories</li>
+                    <li>Bleach</li>
+                    <li>Naruto</li>
+                    <li>One Punch Man</li>
+                    <li>Evangelion</li>
+                    <li>Death Note</li>
+                    <li>Black Clover</li>
+                    <li>Charlotte</li>
+                    <li>Hunter x Hunter</li>
+                    <li>Jujutsu Kaisen</li>
+                    <li>Gachakuta</li>
+                    <li>One Piece</li>
+                    <li>Fullmetal Alchemist: Brotherhood</li>
+                    <li>Guilty Crown</li>
                 </ul>
             </div>
         </section>
@@ -479,17 +483,15 @@
     <script>
         /**
          * EPISODE CONFIGURATION
-         * Add your video source links here. 
-         * If source is empty (""), the app will show an alert.
          */
         const plasticMemoriesEpisodes = [
             { title: "Episode 1", source: "https://kyanori-2.asia/file/tau-video/1b9166da-9bf1-4ae4-a560-3fe772c5840b.mp4" },
             { title: "Episode 2", source: "https://renjiabari.asia/file/tau-video/331712cd-337f-4804-bf5b-8319ce500607.mp4" },
-            { title: "Episode 3", source: "https://rikafurude.asia/file/tau-video/1f781022-cbe4-4814-b61f-9fd0ec200a0d.mp4" },
-            { title: "Episode 4", source: "https://misakina.icu/file/tau-video/cee867bb-0c83-4e10-8b9e-be4931253f85.mp4" },
-            { title: "Episode 5", source: "https://yoroichi.asia/file/tau-video/eca49014-b7f9-425a-bb52-7f87f21b6f14.mp4" },
-            { title: "Episode 6", source: "https://kamadotanjiro.asia/file/tau-video/a6614a17-ca6f-4fa9-896c-f9aa4ac139be.mp4" },
-            { title: "Episode 7", source: "https://yurexa-1.asia/file/tau-video/d1ec1ab1-220d-452f-bc3c-88f9c67ba280.mp4" },
+            { title: "Episode 3", source: "" },
+            { title: "Episode 4", source: "" },
+            { title: "Episode 5", source: "" },
+            { title: "Episode 6", source: "" },
+            { title: "Episode 7", source: "" },
             { title: "Episode 8", source: "" },
             { title: "Episode 9", source: "" },
             { title: "Episode 10", source: "" },
@@ -505,12 +507,8 @@
         const toast = document.getElementById('toast');
         const header = document.getElementById('mainHeader');
 
-        /**
-         * Dynamically generates the episode cards based on the array above
-         */
         function initGrid() {
             episodeGrid.innerHTML = ''; 
-            
             plasticMemoriesEpisodes.forEach((ep) => {
                 const card = document.createElement('div');
                 card.className = 'episode-card';
@@ -528,7 +526,6 @@
                         <div class="episode-title">${ep.title}</div>
                     </div>
                 `;
-                
                 card.addEventListener('click', () => {
                     if (ep.source && ep.source.trim() !== "") {
                         openVideo(ep.source);
@@ -536,21 +533,16 @@
                         showToast("Episode not available yet.");
                     }
                 });
-                
                 episodeGrid.appendChild(card);
             });
         }
 
         function switchSection(sectionId, element) {
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            if (element) {
-                element.classList.add('active');
-            }
+            if (element) element.classList.add('active');
             document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
             const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
+            if (targetSection) targetSection.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -586,9 +578,7 @@
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
-                closeModal();
-            }
+            if (e.key === 'Escape' && videoModal.classList.contains('active')) closeModal();
         });
 
         window.addEventListener('scroll', () => {
@@ -605,4 +595,4 @@
         });
     </script>
 </body>
-</html>	
+</html>

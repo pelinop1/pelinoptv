@@ -12,6 +12,7 @@
             --bg-color: #0a0a0a;
             --surface-color: #1a1a1a;
             --accent-color: #e50914;
+            --neon-purple: #bc13fe;
             --text-primary: #ffffff;
             --text-secondary: #a3a3a3;
             --transition-speed: 0.3s;
@@ -137,6 +138,52 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- Landing Page Styles --- */
+        .landing-container {
+            height: calc(80vh - 100px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .landing-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+        }
+
+        .landing-title span {
+            color: var(--accent-color);
+            text-shadow: 0 0 20px rgba(229, 9, 20, 0.4);
+        }
+
+        .landing-subtitle {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .neon-pelinop {
+            color: var(--neon-purple);
+            text-decoration: none;
+            font-weight: 600;
+            text-shadow: 0 0 5px rgba(188, 19, 254, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .neon-pelinop:hover {
+            text-shadow: 0 0 12px rgba(188, 19, 254, 0.8), 0 0 20px rgba(188, 19, 254, 0.4);
+            color: #d866ff;
+        }
+
         /* --- Info Card Styles --- */
         .info-card {
             background-color: var(--surface-color);
@@ -185,100 +232,84 @@
             color: var(--text-primary);
         }
 
-        /* --- Landing Page Styles --- */
-        .landing-container {
-            height: calc(80vh - 100px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .landing-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 1rem;
-            letter-spacing: -2px;
-        }
-
-        .landing-title span {
-            color: var(--accent-color);
-            text-shadow: 0 0 20px rgba(229, 9, 20, 0.4);
-        }
-
-        .landing-subtitle {
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            color: var(--text-secondary);
-            font-weight: 300;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        /* --- Watched Section --- */
-        .aot-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 60vh;
-            text-align: center;
-        }
-
-        .aot-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(1.8rem, 5vw, 2.5rem); 
-            font-weight: 800;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
         /* --- Watchlist Section --- */
         .watchlist-container {
             padding-top: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .watchlist-title {
-            font-size: 2rem;
-            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
             font-family: 'Poppins', sans-serif;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 5px;
         }
 
-        .anime-list {
+        .anime-ordered-list {
             list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
+            counter-reset: anime-counter;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .anime-list li {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
+        .anime-ordered-list li {
+            counter-increment: anime-counter;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 1rem;
+            padding: 1.2rem;
             background: var(--surface-color);
-            border-radius: 8px;
-            transition: all 0.2s;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid transparent;
         }
 
-        .anime-list li:hover {
+        .anime-ordered-list li:hover {
+            background: #222;
+            border-color: rgba(229, 9, 20, 0.3);
+            transform: translateX(10px);
+        }
+
+        .anime-ordered-list li::before {
+            content: counter(anime-counter);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            min-width: 40px;
+            margin-right: 20px;
+            opacity: 0.8;
+        }
+
+        .anime-name {
+            font-size: 1.1rem;
+            font-weight: 600;
             color: var(--text-primary);
-            transform: translateX(5px);
-            background: #252525;
+            flex-grow: 1;
         }
 
-        .anime-list li::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-color);
-            border-radius: 50%;
-            flex-shrink: 0;
+        .completed .anime-name {
+            text-decoration: line-through;
+            text-decoration-color: var(--accent-color);
+            text-decoration-thickness: 1.5px;
+            color: var(--text-secondary);
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            background: rgba(229, 9, 20, 0.1);
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-left: 15px;
+            font-weight: 600;
+            opacity: 0.8;
         }
 
         /* --- Episode Grid --- */
@@ -323,7 +354,7 @@
         }
 
         .thumbnail-container::before {
-            content: 'PELİNOP TV';
+            content: 'PELINFLIX';
             position: absolute;
             color: rgba(255,255,255,0.03);
             font-size: 2rem;
@@ -464,12 +495,14 @@
             }
             .nav-link { font-size: 0.75rem; }
             main { margin-top: 80px; }
-            .anime-list { grid-template-columns: 1fr; }
+            .watchlist-container { max-width: 100%; }
         }
 
         @media (max-width: 480px) {
             nav { gap: 0.5rem; }
             .logo-img { height: 35px; }
+            .watchlist-title { font-size: 1.8rem; }
+            .anime-ordered-list li { padding: 1rem; }
         }
     </style>
 </head>
@@ -480,7 +513,6 @@
             <img src="https://fontmeme.com/permalink/260218/df7d552c.png" alt="PelinopTV Logo" class="logo-img">
         </div>
         <nav>
-            <button class="nav-link" onclick="switchSection('watched', this)">İzlenenler</button>
             <button class="nav-link" onclick="switchSection('plastic-memories', this)">Plastic Memories</button>
             <button class="nav-link" onclick="switchSection('watchlist', this)">İzlenecekler</button>
         </nav>
@@ -491,15 +523,9 @@
         <section id="home" class="section active">
             <div class="landing-container">
                 <h1 class="landing-title">Welcome to <span>Pelinflix</span></h1>
-                <p class="landing-subtitle">Dayı anime izlemeye başladım.</p>
-            </div>
-        </section>
-
-        <!-- İzlenenler -->
-        <section id="watched" class="section">
-            <div class="aot-container">
-                <h2 class="aot-title">Attack on Titan</h2>
-                <p style="color: var(--text-secondary); margin-top: 1rem;">Bitirildi.</p>
+                <p class="landing-subtitle">
+                    <a href="https://www.twitch.tv/pelinop" target="_blank" class="neon-pelinop">Pelinop</a> anime izliyor
+                </p>
             </div>
         </section>
 
@@ -533,22 +559,26 @@
         <!-- İzlenecekler -->
         <section id="watchlist" class="section">
             <div class="watchlist-container">
-                <h2 class="watchlist-title">Sıradaki Maceralar</h2>
-                <ul class="anime-list">
-                    <li>Plastic Memories</li>
-                    <li>Bleach</li>
-                    <li>Naruto</li>
-                    <li>One Punch Man</li>
-                    <li>Evangelion</li>
-                    <li>Death Note</li>
-                    <li>Black Clover</li>
-                    <li>Charlotte</li>
-                    <li>Hunter x Hunter</li>
-                    <li>Jujutsu Kaisen</li>
-                    <li>Gachakuta</li>
-                    <li>One Piece</li>
-                    <li>Fullmetal Alchemist: Brotherhood</li>
-                    <li>Guilty Crown</li>
+                <h2 class="watchlist-title">İzlenecekler</h2>
+                <ul class="anime-ordered-list">
+                    <li class="completed">
+                        <span class="anime-name">Attack on Titan</span>
+                        <span class="status-badge">Bitirildi</span>
+                    </li>
+                    <li><span class="anime-name">Plastic Memories</span></li>
+                    <li><span class="anime-name">Bleach</span></li>
+                    <li><span class="anime-name">Naruto</span></li>
+                    <li><span class="anime-name">One Punch Man</span></li>
+                    <li><span class="anime-name">Evangelion</span></li>
+                    <li><span class="anime-name">Death Note</span></li>
+                    <li><span class="anime-name">Black Clover</span></li>
+                    <li><span class="anime-name">Charlotte</span></li>
+                    <li><span class="anime-name">Hunter x Hunter</span></li>
+                    <li><span class="anime-name">Jujutsu Kaisen</span></li>
+                    <li><span class="anime-name">Gachakuta</span></li>
+                    <li><span class="anime-name">One Piece</span></li>
+                    <li><span class="anime-name">Fullmetal Alchemist: Brotherhood</span></li>
+                    <li><span class="anime-name">Guilty Crown</span></li>
                 </ul>
             </div>
         </section>

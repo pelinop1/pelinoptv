@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PelinopTV - Anime Streaming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --surface-color: #1a1a1a;
+            --accent-color: #e50914;
+            --text-primary: #ffffff;
+            --text-secondary: #a3a3a3;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            transition: background var(--transition-speed);
+        }
+
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color var(--transition-speed);
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-link.active {
+            color: var(--text-primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: all var(--transition-speed);
+            transform: translateX(-50%);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* --- Main Content --- */
+        main {
+            margin-top: 100px;
+            padding: 0 5% 5rem 5%;
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Landing Page Styles --- */
+        .landing-container {
+            height: calc(85vh - 100px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .landing-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            background: linear-gradient(to bottom, #fff, #999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+        }
+
+        .landing-subtitle {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* --- Watched Section (AOT Adjusted) --- */
+        .aot-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+            text-align: center;
+        }
+
+        .aot-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem); 
+            font-weight: 800;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Watchlist Section (Bullet List) --- */
+        .watchlist-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+            text-align: left;
+        }
+
+        .anime-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .anime-list li {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .anime-list li:hover {
+            color: var(--text-primary);
+        }
+
+        .anime-list li::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* --- Anime Detail Section --- */
+        .anime-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .anime-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Grid Layout --- */
+        .episode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .episode-card {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .episode-card:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .thumbnail-container {
+            aspect-ratio: 16/9;
+            background: linear-gradient(45deg, #1a1a1a, #333);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .thumbnail-container::before {
+            content: 'Episode';
+            position: absolute;
+            color: rgba(255,255,255,0.03);
+            font-size: 3rem;
+            font-weight: 900;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .episode-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .episode-card:hover .play-icon {
+            transform: scale(1);
+        }
+
+        .episode-info {
+            padding: 1rem;
+        }
+
+        .episode-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* --- MODAL SYSTEM --- */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 9999;
+            display: none; 
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            width: 95%;
+            max-width: 1100px;
+            position: relative;
+            background: #000;
+            line-height: 0;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 10px;
+            z-index: 10001;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .close-modal:hover {
+            opacity: 1;
+        }
+
+        video {
+            width: 100%;
+            max-height: 85vh;
+            display: block;
+            outline: none;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        /* --- Toast Notification --- */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--surface-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: none;
+            z-index: 3000;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translate(-50%, 20px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                background: rgba(10, 10, 10, 0.95);
+            }
+            nav {
+                gap: 1rem;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            main { margin-top: 160px; }
+            .aot-title { font-size: 1.8rem; }
+            .landing-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="mainHeader">
+        <a href="#" class="logo" onclick="switchSection('home', null)">PelinopTV</a>
+        <nav>
+            <button class="nav-link" onclick="switchSection('watched', this)">İzlenenler</button>
+            <button class="nav-link" onclick="switchSection('plastic-memories', this)">Plastic Memories</button>
+            <button class="nav-link" onclick="switchSection('watchlist', this)">İzlenecekler</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Page -->
+        <section id="home" class="section active">
+            <div class="landing-container">
+                <h1 class="landing-title">Welcome to PelinopTV</h1>
+                <p class="landing-subtitle">Your private anime archive.</p>
+            </div>
+        </section>
+
+        <!-- İzlenenler -->
+        <section id="watched" class="section">
+            <div class="aot-container">
+                <h2 class="aot-title">Attack on Titan</h2>
+            </div>
+        </section>
+
+        <!-- Plastic Memories -->
+        <section id="plastic-memories" class="section">
+            <div class="anime-header"><h1>Plastic Memories</h1></div>
+            <!-- This container will be populated by JavaScript -->
+            <div class="episode-grid" id="episodeGrid"></div>
+        </section>
+
+        <!-- İzlenecekler -->
+        <section id="watchlist" class="section">
+            <div class="watchlist-container">
+                <ul class="anime-list">
+                    <li>Anime 1</li>
+                    <li>Anime 2</li>
+                    <li>Anime 3</li>
+                    <li>Anime 4</li>
+                    <li>Anime 5</li>
+                    <li>Anime 6</li>
+                    <li>Anime 7</li>
+                    <li>Anime 8</li>
+                    <li>Anime 9</li>
+                    <li>Anime 10</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeBtn">&times;</button>
+            <video id="player" controls playsinline crossorigin="anonymous">
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <div id="toast">Episode not available yet.</div>
+
+    <script>
+        /**
+         * EPISODE CONFIGURATION
+         * Add your video source links here. 
+         * If source is empty (""), the app will show an alert.
+         */
+        const plasticMemoriesEpisodes = [
+            { title: "Episode 1", source: "https://kyanori-2.asia/file/tau-video/1b9166da-9bf1-4ae4-a560-3fe772c5840b.mp4" },
+            { title: "Episode 2", source: "https://renjiabari.asia/file/tau-video/331712cd-337f-4804-bf5b-8319ce500607.mp4" },
+            { title: "Episode 3", source: "https://rikafurude.asia/file/tau-video/1f781022-cbe4-4814-b61f-9fd0ec200a0d.mp4" },
+            { title: "Episode 4", source: "https://misakina.icu/file/tau-video/cee867bb-0c83-4e10-8b9e-be4931253f85.mp4" },
+            { title: "Episode 5", source: "https://yoroichi.asia/file/tau-video/eca49014-b7f9-425a-bb52-7f87f21b6f14.mp4" },
+            { title: "Episode 6", source: "https://kamadotanjiro.asia/file/tau-video/a6614a17-ca6f-4fa9-896c-f9aa4ac139be.mp4" },
+            { title: "Episode 7", source: "https://yurexa-1.asia/file/tau-video/d1ec1ab1-220d-452f-bc3c-88f9c67ba280.mp4" },
+            { title: "Episode 8", source: "" },
+            { title: "Episode 9", source: "" },
+            { title: "Episode 10", source: "" },
+            { title: "Episode 11", source: "" },
+            { title: "Episode 12", source: "" },
+            { title: "Episode 13", source: "" }
+        ];
+
+        const episodeGrid = document.getElementById('episodeGrid');
+        const videoModal = document.getElementById('videoModal');
+        const videoPlayer = document.getElementById('player');
+        const closeBtn = document.getElementById('closeBtn');
+        const toast = document.getElementById('toast');
+        const header = document.getElementById('mainHeader');
+
+        /**
+         * Dynamically generates the episode cards based on the array above
+         */
+        function initGrid() {
+            episodeGrid.innerHTML = ''; 
+            
+            plasticMemoriesEpisodes.forEach((ep) => {
+                const card = document.createElement('div');
+                card.className = 'episode-card';
+                card.innerHTML = `
+                    <div class="thumbnail-container">
+                        <div class="play-overlay">
+                            <div class="play-icon">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="episode-info">
+                        <div class="episode-title">${ep.title}</div>
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    if (ep.source && ep.source.trim() !== "") {
+                        openVideo(ep.source);
+                    } else {
+                        showToast("Episode not available yet.");
+                    }
+                });
+                
+                episodeGrid.appendChild(card);
+            });
+        }
+
+        function switchSection(sectionId, element) {
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            if (element) {
+                element.classList.add('active');
+            }
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openVideo(url) {
+            videoPlayer.src = url;
+            videoPlayer.load();
+            videoModal.style.display = 'flex';
+            setTimeout(() => { videoModal.classList.add('active'); }, 10);
+            videoPlayer.play().catch(e => console.log("Autoplay blocked"));
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal() {
+            if (document.fullscreenElement) { document.exitFullscreen(); }
+            videoModal.classList.remove('active');
+            videoPlayer.pause();
+            setTimeout(() => {
+                videoModal.style.display = 'none';
+                videoPlayer.src = "";
+            }, 300);
+            document.body.style.overflow = 'auto'; 
+        }
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initGrid();
+            document.querySelector('.logo').addEventListener('click', (e) => {
+                e.preventDefault();
+                switchSection('home', null);
+            });
+        });
+    </script>
+</body>
+</html>	

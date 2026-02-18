@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pelinflix - Anime izliyoruz!</title>
+    <link rel="icon" type="image/png" href="https://fontmeme.com/permalink/260218/df7d552c.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
@@ -266,6 +267,7 @@
             transition: all 0.3s ease;
             position: relative;
             border: 1px solid transparent;
+            cursor: pointer;
         }
 
         .anime-ordered-list li:hover {
@@ -299,7 +301,6 @@
             color: var(--text-secondary);
         }
 
-        /* Updated Status Badge for Icon */
         .status-badge {
             display: flex;
             align-items: center;
@@ -312,10 +313,6 @@
             border: 1px solid rgba(229, 9, 20, 0.2);
             opacity: 0.9;
             transition: transform 0.2s ease;
-        }
-
-        .anime-ordered-list li:hover .status-badge {
-            transform: scale(1.1);
         }
 
         /* --- Episode Grid --- */
@@ -399,10 +396,6 @@
             transition: transform 0.3s ease;
         }
 
-        .episode-card:hover .play-icon {
-            transform: scale(1);
-        }
-
         .episode-info {
             padding: 1rem;
         }
@@ -413,7 +406,7 @@
             color: var(--text-primary);
         }
 
-        /* --- Modal --- */
+        /* --- Modals --- */
         .modal {
             position: fixed;
             top: 0;
@@ -441,6 +434,50 @@
             background: #000;
         }
 
+        /* Player Title Overlay */
+        .player-title-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            z-index: 10;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .player-anime-name {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .player-episode-name {
+            font-size: 1.25rem;
+            color: #fff;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Info Modal Specific Styling */
+        .info-modal-box {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            max-width: 650px;
+            width: 90%;
+            border-top: 4px solid var(--accent-color);
+            box-shadow: 0 10px 60px rgba(0,0,0,0.9);
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
         .close-modal {
             position: absolute;
             top: -50px;
@@ -456,8 +493,11 @@
             transition: opacity 0.2s;
         }
 
-        .close-modal:hover {
-            opacity: 1;
+        .info-modal-box .close-modal {
+            top: 10px;
+            right: 15px;
+            font-size: 2rem;
+            color: var(--text-secondary);
         }
 
         video {
@@ -491,24 +531,11 @@
 
         /* --- Responsive --- */
         @media (max-width: 768px) {
-            header {
-                padding: 0.8rem 1rem;
-                background: rgba(10, 10, 10, 0.98);
-            }
-            .logo-img { height: 40px; }
-            nav {
-                gap: 0.8rem;
-            }
+            header { padding: 0.8rem 1rem; }
+            nav { gap: 0.8rem; }
             .nav-link { font-size: 0.75rem; }
             main { margin-top: 80px; }
-            .watchlist-container { max-width: 100%; }
-        }
-
-        @media (max-width: 480px) {
-            nav { gap: 0.5rem; }
-            .logo-img { height: 35px; }
-            .watchlist-title { font-size: 1.8rem; }
-            .anime-ordered-list li { padding: 1rem; }
+            .player-episode-name { font-size: 1rem; }
         }
     </style>
 </head>
@@ -535,7 +562,7 @@
             </div>
         </section>
 
-        <!-- Plastic Memories -->
+        <!-- Plastic Memories Section -->
         <section id="plastic-memories" class="section">
             <div class="anime-header">
                 <h1>Plastic Memories (2015)</h1>
@@ -551,7 +578,7 @@
                     Hakkında
                 </div>
                 <p class="info-description">
-                    Hikaye yakın bir gelecekte dünyanın dört bir tarafına yayılan androidlerin insanlar gibi göründüğü zamanda geçiyor. Androidleri üreten şirket SA, Giftia adında yeni bir tür android üretir. Giftia'ların özelliği ise şimdiye kadar içinde en çok duygu barından androidler olmasıdır. Ama bu androidlerin bir hizmet sınırı vardır. Bu sınır dolduğunda androidler garip davranmaya başlar. Bu nedenle SA şirketi süresi dolan androidleri geri almak için bir takıma ihtiyaç duyar. SA'da çalışmaya başlayan yeni işçi Tsukasa Mizugaki bir takım kurması ve diğer androidleri bulup getirmesi gerekecektir.
+                    İnsan duygularını mükemmel bir şekilde taklit edebilen Giftia adlı androidlerin üretildiği bir gelecekte, bu varlıkların bir "son kullanma tarihi" vardır. 81.920 saati doldurduklarında, anıları bozulmaya başlar ve tehlikeli hale gelirler. Tsukasa Mizugaki, bu androidleri sahiplerinden nazikçe geri almakla görevli olan Terminal Servis'e katılır ve burada, hizmet süresinin sonuna yaklaşan gizemli bir Giftia olan Isla ile ortak olur.
                 </p>
                 <div class="info-meta">
                     <span class="rating-badge">IMDb</span>
@@ -562,34 +589,12 @@
             <div class="episode-grid" id="episodeGrid"></div>
         </section>
 
-        <!-- İzlenecekler -->
+        <!-- İzlenecekler Section -->
         <section id="watchlist" class="section">
             <div class="watchlist-container">
                 <h2 class="watchlist-title">İzlenecekler</h2>
-                <ul class="anime-ordered-list">
-                    <li class="completed">
-                        <span class="anime-name">Attack on Titan</span>
-                        <!-- Status Badge Updated to Red Checkmark in Square -->
-                        <span class="status-badge">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                        </span>
-                    </li>
-                    <li><span class="anime-name">Plastic Memories</span></li>
-                    <li><span class="anime-name">Bleach</span></li>
-                    <li><span class="anime-name">Naruto</span></li>
-                    <li><span class="anime-name">One Punch Man</span></li>
-                    <li><span class="anime-name">Evangelion</span></li>
-                    <li><span class="anime-name">Death Note</span></li>
-                    <li><span class="anime-name">Black Clover</span></li>
-                    <li><span class="anime-name">Charlotte</span></li>
-                    <li><span class="anime-name">Hunter x Hunter</span></li>
-                    <li><span class="anime-name">Jujutsu Kaisen</span></li>
-                    <li><span class="anime-name">Gachiakuta</span></li>
-                    <li><span class="anime-name">One Piece</span></li>
-                    <li><span class="anime-name">Fullmetal Alchemist: Brotherhood</span></li>
-                    <li><span class="anime-name">Guilty Crown</span></li>
+                <ul class="anime-ordered-list" id="watchlistItems">
+                    <!-- List will be populated via JS -->
                 </ul>
             </div>
         </section>
@@ -598,6 +603,10 @@
     <!-- Video Modal -->
     <div class="modal" id="videoModal">
         <div class="modal-content">
+            <div class="player-title-overlay">
+                <span class="player-anime-name" id="playerAnimeName">ANİME ADI</span>
+                <span class="player-episode-name" id="playerEpTitle">Bölüm Yükleniyor...</span>
+            </div>
             <button class="close-modal" id="closeBtn">&times;</button>
             <video id="player" controls playsinline crossorigin="anonymous">
                 <source src="" type="video/mp4">
@@ -605,116 +614,202 @@
         </div>
     </div>
 
+    <!-- Info Modal -->
+    <div class="modal" id="infoModal">
+        <div class="info-modal-box">
+            <button class="close-modal" id="infoCloseBtn">&times;</button>
+            <div class="info-title" id="infoModalTitle" style="font-size: 1.5rem; margin-bottom: 1rem; font-family: 'Poppins', sans-serif;"></div>
+            <p class="info-description" id="infoModalDesc" style="font-size: 1.05rem;"></p>
+            <div class="info-meta" id="infoModalMeta" style="margin-top: 1.5rem;"></div>
+        </div>
+    </div>
+
     <div id="toast">Bölüm henüz mevcut değil.</div>
 
     <script>
+        const animeDatabase = {
+            'Attack on Titan': { 
+                desc: 'İnsanlığın devasa duvarlar arkasına çekilip "Titan" adı verilen devasa varlıklardan korunduğu bir dünyada, genç Eren Yeager, annesinin ölümü ve kasabasının yıkımının ardından Titanların sonunu getirmeye ant içer. Sadece bir hayatta kalma mücadelesi değil, aynı zamanda siyasi entrikalar, derin sırlar ve özgürlüğün gerçek bedeli üzerine kurgulanmış epik bir hikayedir.', 
+                rating: '9.1',
+                completed: true
+            },
+            'Plastic Memories': { 
+                desc: 'Giftia adı verilen, insan duygularına ve sınırlı bir yaşam süresine sahip androidlerin üretildiği bir gelecekte geçiyor. Hikaye, süresi dolan androidleri geri toplamakla görevli olan Terminal Servis\'te yeni işe başlayan Tsukasa Mizugaki ve ortağı Isla\'nın hüzünlü ve anlamlı yolculuğunu anlatır. "Gidenlerin anıları nerede kalır?" sorusuna yanıt arayan duygusal bir dramadır.', 
+                rating: '7.4' 
+            },
+            'Bleach': { 
+                desc: 'Kurosaki Ichigo, ruhları görebilen sıradan bir lise öğrencisiyken, bir kaza sonucu Yaralı bir Ölüm Tanrısı (Shinigami) olan Rukia Kuchiki\'nin güçlerini devralır. Ichigo, "Hollow" adı verilen kötü ruhlarla savaşmak ve huzursuz ruhları huzura erdirmek zorunda kalırken, kendisini Soul Society adındaki ruhlar aleminin karmaşık ve tehlikeli politikalarının ortasında bulur.', 
+                rating: '8.2' 
+            },
+            'Naruto': { 
+                desc: 'İçinde mühürlenmiş olan Dokuz Kuyruklu Tilki nedeniyle köylüleri tarafından dışlanan genç ninja Naruto Uzumaki\'nin hikayesidir. Naruto, her şeye rağmen pes etmeyerek köyünün lideri olan "Hokage" unvanını kazanmak ve herkesin saygısını elde etmek için bitmek bilmeyen bir azimle savaşır. Dostluk, azim ve kader temalarını işleyen zamansız bir başyapıttır.', 
+                rating: '8.4' 
+            },
+            'One Punch Man': { 
+                desc: 'Saitama, hobi olarak kahramanlık yapan inanılmaz güçlü bir adamdır. Sadece üç yıllık sıkı eğitimden sonra o kadar güçlenmiştir ki, her rakibini tek bir yumrukla devirebilmektedir. Ancak bu mutlak güç, Saitama için büyük bir can sıkıntısını da beraberinde getirir. Süper kahramanların dünyasını hicveden, aksiyon dolu ve son derece komik bir hikaye.', 
+                rating: '8.7' 
+            },
+            'Evangelion': { 
+                desc: 'Dünya, "Melek" adı verilen devasa varlıklar tarafından tehdit edilmektedir. İnsanlığın son kalesi, Evangelion adı verilen dev biyomekanik robotları kullanan NERV kuruluşudur. Ancak bu robotları sadece 14 yaşındaki çocuklar kontrol edebilir. Genç Shinji Ikari, babası tarafından bu savaşın ortasına atılırken, seri bir robot animesinden çok insanın psikolojisini, varoluşçuluğu ve travmalarını sorgulayan derin bir yapıya bürünür.', 
+                rating: '8.5' 
+            },
+            'Death Note': { 
+                desc: 'Dahi bir lise öğrencisi olan Light Yagami, üzerinde "Death Note" yazan gizemli bir defter bulur. Deftere adı yazılan kişinin öldüğünü keşfeden Light, dünyayı suçlulardan temizleyerek kendi ideal adalet sistemini kurmaya karar verir. Ancak kendisini "Kira" olarak adlandıran bu görünmez infazcıyı durdurmak için dünyanın en büyük dedektifi olan "L" devreye girdiğinde, tarihin en büyük zeka savaşı başlar.', 
+                rating: '8.9' 
+            },
+            'Black Clover': { 
+                desc: 'Herkesin büyü güçleriyle doğduğu bir dünyada, büyü kullanamayan tek kişi olan Asta ve doğuştan dahi bir büyücü olan rakibi Yuno\'nun hikayesi. İkisi de bir gün "Büyücü Kral" olma hayaliyle yola çıkarlar. Asta, büyü gücü yerine nadir görülen anti-büyü kılıçlarını kullanarak sınıf ayrımlarının ve imkansızlıkların hüküm sürdüğü bu krallıkta yükselmeye çalışır.', 
+                rating: '8.3' 
+            },
+            'Charlotte': { 
+                desc: 'Dünyada ergenlik dönemindeki az sayıda çocuk, bir meteor tozunun etkisiyle geçici süper güçler kazanır. Yuu Otosaka, gücünü kendi bencil çıkarları için kullanırken, karşısına Nao Tomori adında bir kız çıkar. Nao, onu yetenekli çocukların toplandığı bir okula davet eder. Hikaye basit bir güç fantezisi gibi başlasa da, zamanla fedakarlık, kayıp ve kader üzerine ağır bir dramaya dönüşür.', 
+                rating: '7.5' 
+            },
+            'Hunter x Hunter': { 
+                desc: 'Gon Freecss, öldüğünü sandığı babasının aslında dünyanın en büyük "Avcı"larından (Hunter) biri olduğunu öğrenir. Babasını bulmak için Avcı sınavına katılan Gon, burada hayat boyu sürecek dostluklar kurar. Kuralsız ve tehlikeli bir dünyada geçen bu macera, inanılmaz detaylı güç sistemi (Nen) ve her biri kendine has derinlikte olan düşmanlarıyla anime dünyasının en zekice kurgulanmış serilerinden biridir.', 
+                rating: '9.0' 
+            },
+            'Jujutsu Kaisen': { 
+                desc: 'İnsanların negatif duygularından beslenen "Lanetler", dünyada dehşet saçmaktadır. Yuji Itadori, arkadaşlarını kurtarmak için efsanevi lanet Sukuna\'nın parmağını yutar ve onun gücünü kendi bedeninde barındırmaya başlar. Yuji, hem kendi içindeki canavarı kontrol etmek hem de Jujutsu büyücüsü olarak diğer lanetleri yok etmek için karanlık ve aksiyon dolu bir savaşa katılır.', 
+                rating: '8.5' 
+            },
+            'Gachakuta': { 
+                desc: 'Cennetten atılan çöplerin altında yaşayan insanların bulunduğu bir dünyada, Rudo işlemediği bir suç yüzünden "Çukur"a atılır. Orada "Cleaner" adı verilen ve çöpleri silahlara dönüştürebilen insanlarla tanışır. Rudo, intikam almak ve bu adaletsiz sistemi yıkmak için Çukur\'un derinliklerinden yukarıya doğru savaşarak tırmanmaya başlar. Muazzam sanatsal tarzı ve özgün dünyasıyla dikkat çeken bir seridir.', 
+                rating: 'TBA' 
+            },
+            'One Piece': { 
+                desc: 'Monkey D. Luffy, vücudu lastik gibi esneyebilen genç bir çocuktur. Efsanevi korsan Gold Roger\'ın bıraktığı hazine olan "One Piece"i bulmak ve Korsanlar Kralı olmak için denize açılır. Luffy, kendine has yetenekleri olan "Hasır Şapka Korsanları" grubunu kurarak, adalet, hükümet, kölelik ve özgürlük gibi evrensel temaların işlendiği devasa bir dünyada bitmek bilmeyen bir maceraya atılır.', 
+                rating: '9.0' 
+            },
+            'Fullmetal Alchemist: Brotherhood': { 
+                desc: 'Edward ve Alphonse Elric kardeşler, ölen annelerini geri getirmek için simyanın en büyük tabusunu çiğnerler. Bedel olarak Edward bir kolunu ve bir bacağını, Alphonse ise tüm bedenini kaybeder. Eski hallerine dönmek için efsanevi "Felsefe Taşı"nı arayan kardeşler, yolculukları boyunca krallığın derinliklerine kök salmış karanlık bir komployu ve insan ruhunun sınırlarını keşfederler.', 
+                rating: '9.1' 
+            },
+            'Guilty Crown': { 
+                desc: '2039 yılında Japonya, "Kıyamet Virüsü"nün ardından bir dış otorite (GHQ) tarafından kontrol edilmektedir. Shu Ouma adındaki çekingen bir lise öğrencisi, insanların ruhlarını silahlara (Void) dönüştürme gücü kazandığında, kendisini direniş grubu olan "Tabut Takımı"nın ve karmaşık bir savaşın ortasında bulur. Müzikleri ve görsel tarzıyla akıllarda kalan distopik bir dramdır.', 
+                rating: '7.1' 
+            }
+        };
+
         const plasticMemoriesEpisodes = [
-            { title: "Bölüm 1", source: "https://sakazuki.icu/file/tau-video/84680062-5171-4750-90ee-3fd711f7191f.mp4" },
-            { title: "Bölüm 2", source: "https://renjiabari.asia/file/tau-video/331712cd-337f-4804-bf5b-8319ce500607.mp4" },
-            { title: "Bölüm 3", source: "https://rikafurude.asia/file/tau-video/1f781022-cbe4-4814-b61f-9fd0ec200a0d.mp4" },
-            { title: "Bölüm 4", source: "https://misakina.icu/file/tau-video/cee867bb-0c83-4e10-8b9e-be4931253f85.mp4" },
-            { title: "Bölüm 5", source: "https://yoroichi.asia/file/tau-video/eca49014-b7f9-425a-bb52-7f87f21b6f14.mp4" },
-            { title: "Bölüm 6", source: "https://kamadotanjiro.asia/file/tau-video/a6614a17-ca6f-4fa9-896c-f9aa4ac139be.mp4" },
-            { title: "Bölüm 7", source: "https://yurexa-1.asia/file/tau-video/d1ec1ab1-220d-452f-bc3c-88f9c67ba280.mp4" },
-            { title: "Bölüm 8", source: "https://nezukami.cfd/file/tau-video/a05fa9e9-e80d-4cb8-a70b-080bf676310d.mp4" },
-            { title: "Bölüm 9", source: "https://misakina.asia/file/tau-video/27fd1e22-69dc-4906-b003-c0f080af860b.mp4" },
-            { title: "Bölüm 10", source: "https://misakina.cyou/file/tau-video/b74857cb-0a84-4bb0-bc36-bfdc183fbf05.mp4" },
-            { title: "Bölüm 11", source: "https://nozume-1.asia/file/tau-video/ffcd4b44-875f-44de-baf7-95f422b31efe.mp4" },
-            { title: "Bölüm 12", source: "https://meisura-1.asia/file/tau-video/2046e151-b6ca-44ac-ac03-748d4f6af6df.mp4" },
-            { title: "Bölüm 13", source: "https://kyanori-4.asia/file/tau-video/d0e98059-0f87-44cc-a959-34602bd201e8.mp4" }
+            { title: "Bölüm 1: İlk Kez Selamlanan Ortak", source: "https://sakazuki.icu/file/tau-video/84680062-5171-4750-90ee-3fd711f7191f.mp4" },
+            { title: "Bölüm 2: Dışarıda Yağmur Yağmasını İstemiyorum", source: "https://renjiabari.asia/file/tau-video/331712cd-337f-4804-bf5b-8319ce500607.mp4" },
+            { title: "Bölüm 3: Beraber Yaşamaya Başladık", source: "https://rikafurude.asia/file/tau-video/1f781022-cbe4-4814-b61f-9fd0ec200a0d.mp4" },
+            { title: "Bölüm 4: Nasıl Gülümseyeceğini Bilmiyorum", source: "https://misakina.icu/file/tau-video/cee867bb-0c83-4e10-8b9e-be4931253f85.mp4" },
+            { title: "Bölüm 5: Senin İçin Ulaşmak İstediğim Söz", source: "https://yoroichi.asia/file/tau-video/eca49014-b7f9-425a-bb52-7f87f21b6f14.mp4" },
+            { title: "Bölüm 6: İkimize de Hoşgeldin", source: "https://kamadotanjiro.asia/file/tau-video/a6614a17-ca6f-4fa9-896c-f9aa4ac139be.mp4" },
+            { title: "Bölüm 7: Nasıl Randevu Alınacağını Öğrenmek", source: "https://yurexa-1.asia/file/tau-video/d1ec1ab1-220d-452f-bc3c-88f9c67ba280.mp4" },
+            { title: "Bölüm 8: Hiç Bilmediğim Bir Havai Fişek", source: "https://nezukami.cfd/file/tau-video/a05fa9e9-e80d-4cb8-a70b-080bf676310d.mp4" },
+            { title: "Bölüm 9: Duraktan Sonrası", source: "https://misakina.asia/file/tau-video/27fd1e22-69dc-4906-b003-c0f080af860b.mp4" },
+            { title: "Bölüm 10: Artık Ortak Değiliz", source: "https://misakina.cyou/file/tau-video/b74857cb-0a84-4bb0-bc36-bfdc183fbf05.mp4" },
+            { title: "Bölüm 11: Pirinç Omlet Günü", source: "https://nozume-1.asia/file/tau-video/ffcd4b44-875f-44de-baf7-95f422b31efe.mp4" },
+            { title: "Bölüm 12: Anılar Dolup Taşıyor", source: "https://meisura-1.asia/file/tau-video/2046e151-b6ca-44ac-ac03-748d4f6af6df.mp4" },
+            { title: "Bölüm 13: Umarım Bir Gün Tekrar Kavuşuruz", source: "https://kyanori-4.asia/file/tau-video/d0e98059-0f87-44cc-a959-34602bd201e8.mp4" }
         ];
 
         const episodeGrid = document.getElementById('episodeGrid');
         const videoModal = document.getElementById('videoModal');
+        const infoModal = document.getElementById('infoModal');
         const videoPlayer = document.getElementById('player');
+        const playerEpTitle = document.getElementById('playerEpTitle');
         const closeBtn = document.getElementById('closeBtn');
+        const infoCloseBtn = document.getElementById('infoCloseBtn');
         const toast = document.getElementById('toast');
         const header = document.getElementById('mainHeader');
+        const watchlistItems = document.getElementById('watchlistItems');
 
-        function initGrid() {
+        function initApp() {
+            // Init Episode Grid
             episodeGrid.innerHTML = ''; 
             plasticMemoriesEpisodes.forEach((ep) => {
                 const card = document.createElement('div');
                 card.className = 'episode-card';
                 card.innerHTML = `
                     <div class="thumbnail-container">
-                        <div class="play-overlay">
-                            <div class="play-icon">
-                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </div>
-                        </div>
+                        <div class="play-overlay"><div class="play-icon"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
                     </div>
-                    <div class="episode-info">
-                        <div class="episode-title">${ep.title}</div>
-                    </div>
+                    <div class="episode-info"><div class="episode-title">${ep.title}</div></div>
                 `;
-                card.addEventListener('click', () => {
-                    if (ep.source && ep.source.trim() !== "") {
-                        openVideo(ep.source);
-                    } else {
-                        showToast("Bölüm henüz mevcut değil.");
-                    }
-                });
+                card.onclick = () => ep.source ? openVideo(ep.source, ep.title, "Plastic Memories") : showToast("Bölüm mevcut değil.");
                 episodeGrid.appendChild(card);
+            });
+
+            // Init Watchlist
+            watchlistItems.innerHTML = '';
+            Object.keys(animeDatabase).forEach(name => {
+                const item = animeDatabase[name];
+                const li = document.createElement('li');
+                if (item.completed) li.className = 'completed';
+                li.innerHTML = `
+                    <span class="anime-name">${name}</span>
+                    ${item.completed ? '<span class="status-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>' : ''}
+                `;
+                li.onclick = () => showAnimeInfo(name);
+                watchlistItems.appendChild(li);
             });
         }
 
         function switchSection(sectionId, element) {
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             if (element) element.classList.add('active');
-            
             document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) targetSection.classList.add('active');
-            
+            document.getElementById(sectionId).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function openVideo(url) {
+        function showAnimeInfo(name) {
+            const data = animeDatabase[name];
+            if (!data) return;
+            document.getElementById('infoModalTitle').textContent = name;
+            document.getElementById('infoModalDesc').textContent = data.desc;
+            document.getElementById('infoModalMeta').innerHTML = `
+                <span class="rating-badge">IMDb</span>
+                <span class="rating-value">${data.rating} / 10</span>
+            `;
+            infoModal.style.display = 'flex';
+            setTimeout(() => infoModal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openVideo(url, epTitle, animeName) {
+            playerEpTitle.textContent = epTitle;
+            document.getElementById('playerAnimeName').textContent = animeName.toUpperCase();
             videoPlayer.src = url;
             videoPlayer.load();
             videoModal.style.display = 'flex';
-            setTimeout(() => { videoModal.classList.add('active'); }, 10);
-            videoPlayer.play().catch(e => console.log("Auto-play blocked"));
+            setTimeout(() => videoModal.classList.add('active'), 10);
+            videoPlayer.play().catch(() => {});
             document.body.style.overflow = 'hidden'; 
         }
 
         function closeModal() {
-            videoModal.classList.remove('active');
+            [videoModal, infoModal].forEach(m => m.classList.remove('active'));
             videoPlayer.pause();
             setTimeout(() => {
                 videoModal.style.display = 'none';
+                infoModal.style.display = 'none';
                 videoPlayer.src = "";
             }, 300);
             document.body.style.overflow = 'auto'; 
         }
 
-        function showToast(message) {
-            toast.textContent = message;
+        closeBtn.onclick = closeModal;
+        infoCloseBtn.onclick = closeModal;
+        window.onclick = (e) => { if (e.target.classList.contains('modal')) closeModal(); };
+        document.onkeydown = (e) => { if (e.key === 'Escape') closeModal(); };
+
+        function showToast(msg) {
+            toast.textContent = msg;
             toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+            setTimeout(() => toast.style.display = 'none', 3000);
         }
 
-        closeBtn.addEventListener('click', closeModal);
-        videoModal.addEventListener('click', (e) => {
-            if (e.target === videoModal) closeModal();
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && videoModal.classList.contains('active')) closeModal();
-        });
-
-        window.addEventListener('scroll', () => {
+        window.onscroll = () => {
             if (window.scrollY > 50) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
-        });
+        };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initGrid();
-        });
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
-

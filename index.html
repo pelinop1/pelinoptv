@@ -315,7 +315,7 @@
             transition: transform 0.2s ease;
         }
 
-        /* --- Episode Grid --- */
+        /* --- Episode Grid & Controls --- */
         .anime-header {
             margin-bottom: 2rem;
         }
@@ -324,6 +324,62 @@
             font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 0.5rem;
+        }
+
+        /* Season and Range Selectors */
+        .episode-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .season-select {
+            background-color: var(--surface-color);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .season-select:focus {
+            border-color: var(--accent-color);
+        }
+
+        .range-selector {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .range-btn {
+            background-color: var(--surface-color);
+            color: var(--text-secondary);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .range-btn:hover {
+            border-color: rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        .range-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.3);
         }
 
         .episode-grid {
@@ -536,6 +592,7 @@
             .nav-link { font-size: 0.75rem; }
             main { margin-top: 80px; }
             .player-episode-name { font-size: 1rem; }
+            .episode-controls { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -547,6 +604,7 @@
         </div>
         <nav>
             <button class="nav-link" onclick="switchSection('plastic-memories', this)">Plastic Memories</button>
+            <button class="nav-link" onclick="switchSection('bleach', this)">Bleach</button>
             <button class="nav-link" onclick="switchSection('watchlist', this)">İzlenecekler</button>
         </nav>
     </header>
@@ -586,7 +644,44 @@
                 </div>
             </div>
 
-            <div class="episode-grid" id="episodeGrid"></div>
+            <div class="episode-grid" id="episodeGridPlastic"></div>
+        </section>
+
+        <!-- Bleach Section -->
+        <section id="bleach" class="section">
+            <div class="anime-header">
+                <h1>Bleach (2004)</h1>
+            </div>
+
+            <div class="info-card">
+                <div class="info-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-color);">
+                        <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"></path>
+                        <path d="M12 8v4"></path>
+                        <path d="M12 16h.01"></path>
+                    </svg>
+                    Hakkında
+                </div>
+                <p class="info-description">
+                    Kurosaki Ichigo, ruhları görebilen sıradan bir lise öğrencisiyken, bir kaza sonucu Yaralı bir Ölüm Tanrısı (Shinigami) olan Rukia Kuchiki'nin güçlerini devralır. Ichigo, "Hollow" adı verilen kötü ruhlarla savaşmak ve huzursuz ruhları huzura erdirmek zorunda kalırken, kendisini Soul Society adındaki ruhlar aleminin karmaşık ve tehlikeli politikalarının ortasında bulur.
+                </p>
+                <div class="info-meta">
+                    <span class="rating-badge">IMDb</span>
+                    <span class="rating-value">8.2 / 10</span>
+                </div>
+            </div>
+
+            <div class="episode-controls">
+                <select id="bleachSeasonSelect" class="season-select" onchange="handleBleachSeasonChange(this.value)">
+                    <option value="1">Season 1</option>
+                    <option value="2">Season 2</option>
+                </select>
+                <div id="bleachRangeSelector" class="range-selector">
+                    <!-- Ranges populated by JS -->
+                </div>
+            </div>
+
+            <div class="episode-grid" id="episodeGridBleach"></div>
         </section>
 
         <!-- İzlenecekler Section -->
@@ -629,64 +724,64 @@
     <script>
         const animeDatabase = {
             'Attack on Titan': { 
-                desc: 'İnsanlığın devasa duvarlar arkasına çekilip "Titan" adı verilen devasa varlıklardan korunduğu bir dünyada, genç Eren Yeager, annesinin ölümü ve kasabasının yıkımının ardından Titanların sonunu getirmeye ant içer. Sadece bir hayatta kalma mücadelesi değil, aynı zamanda siyasi entrikalar, derin sırlar ve özgürlüğün gerçek bedeli üzerine kurgulanmış epik bir hikayedir.', 
-                rating: '9.1',
-                completed: true
+                desc: 'İnsanlığın devasa duvarlar arkasına çekilip "Titan" adı verilen devasa varlıklardan korunduğu bir dünyada, Eren Yeager ve arkadaşları duvarın yıkılmasıyla trajik bir mücadeleye atılırlar.', 
+                rating: '9.1', 
+                completed: true 
             },
             'Plastic Memories': { 
-                desc: 'Giftia adı verilen, insan duygularına ve sınırlı bir yaşam süresine sahip androidlerin üretildiği bir gelecekte geçiyor. Hikaye, süresi dolan androidleri geri toplamakla görevli olan Terminal Servis\'te yeni işe başlayan Tsukasa Mizugaki ve ortağı Isla\'nın hüzünlü ve anlamlı yolculuğunu anlatır. "Gidenlerin anıları nerede kalır?" sorusuna yanıt arayan duygusal bir dramadır.', 
+                desc: 'İnsan duygularını mükemmel bir şekilde taklit edebilen Giftia adlı androidlerin üretildiği bir gelecekte, bu varlıkların bir "son kullanma tarihi" vardır. Tsukasa Mizugaki, bu androidleri sahiplerinden nazikçe geri almakla görevli olan Terminal Servis\'e katılır.', 
                 rating: '7.4' 
             },
             'Bleach': { 
-                desc: 'Kurosaki Ichigo, ruhları görebilen sıradan bir lise öğrencisiyken, bir kaza sonucu Yaralı bir Ölüm Tanrısı (Shinigami) olan Rukia Kuchiki\'nin güçlerini devralır. Ichigo, "Hollow" adı verilen kötü ruhlarla savaşmak ve huzursuz ruhları huzura erdirmek zorunda kalırken, kendisini Soul Society adındaki ruhlar aleminin karmaşık ve tehlikeli politikalarının ortasında bulur.', 
+                desc: 'Kurosaki Ichigo, ruhları görebilen sıradan bir lise öğrencisiyken, bir kaza sonucu Yaralı bir Ölüm Tanrısı (Shinigami) olan Rukia Kuchiki\'nin güçlerini devralır ve ruhlar dünyasının koruyucusu olur.', 
                 rating: '8.2' 
             },
             'Naruto': { 
-                desc: 'İçinde mühürlenmiş olan Dokuz Kuyruklu Tilki nedeniyle köylüleri tarafından dışlanan genç ninja Naruto Uzumaki\'nin hikayesidir. Naruto, her şeye rağmen pes etmeyerek köyünün lideri olan "Hokage" unvanını kazanmak ve herkesin saygısını elde etmek için bitmek bilmeyen bir azimle savaşır. Dostluk, azim ve kader temalarını işleyen zamansız bir başyapıttır.', 
+                desc: 'İçinde mühürlenmiş olan Dokuz Kuyruklu Tilki nedeniyle köylüleri tarafından dışlanan genç ninja Naruto Uzumaki\'nin, köyün lideri olan Hokage olma hayalinin ve kendini kanıtlama çabasının hikayesidir.', 
                 rating: '8.4' 
             },
             'One Punch Man': { 
-                desc: 'Saitama, hobi olarak kahramanlık yapan inanılmaz güçlü bir adamdır. Sadece üç yıllık sıkı eğitimden sonra o kadar güçlenmiştir ki, her rakibini tek bir yumrukla devirebilmektedir. Ancak bu mutlak güç, Saitama için büyük bir can sıkıntısını da beraberinde getirir. Süper kahramanların dünyasını hicveden, aksiyon dolu ve son derece komik bir hikaye.', 
+                desc: 'Saitama, hobi olarak kahramanlık yapan inanılmaz güçlü bir adamdır. O kadar güçlüdür ki, en zorlu rakiplerini bile tek bir yumrukla yener, bu da onu büyük bir boşluğa sürükler.', 
                 rating: '8.7' 
             },
             'Evangelion': { 
-                desc: 'Dünya, "Melek" adı verilen devasa varlıklar tarafından tehdit edilmektedir. İnsanlığın son kalesi, Evangelion adı verilen dev biyomekanik robotları kullanan NERV kuruluşudur. Ancak bu robotları sadece 14 yaşındaki çocuklar kontrol edebilir. Genç Shinji Ikari, babası tarafından bu savaşın ortasına atılırken, seri bir robot animesinden çok insanın psikolojisini, varoluşçuluğu ve travmalarını sorgulayan derin bir yapıya bürünür.', 
+                desc: 'Dünya, "Melek" adı verilen devasa varlıklar tarafından tehdit edilmektedir. İnsanlığın son umudu olan EVA adlı dev robotları kullanmak için seçilen gençlerin psikolojik travmalarını konu alır.', 
                 rating: '8.5' 
             },
             'Death Note': { 
-                desc: 'Dahi bir lise öğrencisi olan Light Yagami, üzerinde "Death Note" yazan gizemli bir defter bulur. Deftere adı yazılan kişinin öldüğünü keşfeden Light, dünyayı suçlulardan temizleyerek kendi ideal adalet sistemini kurmaya karar verir. Ancak kendisini "Kira" olarak adlandıran bu görünmez infazcıyı durdurmak için dünyanın en büyük dedektifi olan "L" devreye girdiğinde, tarihin en büyük zeka savaşı başlar.', 
+                desc: 'Dahi bir lise öğrencisi olan Light Yagami, üzerine ismini yazdığı kişinin öleceği gizemli bir defter bulur. Light, bu güçle dünyayı suçlulardan temizlemeye karar verir.', 
                 rating: '8.9' 
             },
             'Black Clover': { 
-                desc: 'Herkesin büyü güçleriyle doğduğu bir dünyada, büyü kullanamayan tek kişi olan Asta ve doğuştan dahi bir büyücü olan rakibi Yuno\'nun hikayesi. İkisi de bir gün "Büyücü Kral" olma hayaliyle yola çıkarlar. Asta, büyü gücü yerine nadir görülen anti-büyü kılıçlarını kullanarak sınıf ayrımlarının ve imkansızlıkların hüküm sürdüğü bu krallıkta yükselmeye çalışır.', 
+                desc: 'Herkesin büyü güçleriyle doğduğu bir dünyada, büyü kullanamayan tek kişi olan Asta, pes etmeyerek en büyük büyücü olan "Büyücü Kral" olma yolunda savaşır.', 
                 rating: '8.3' 
             },
             'Charlotte': { 
-                desc: 'Dünyada ergenlik dönemindeki az sayıda çocuk, bir meteor tozunun etkisiyle geçici süper güçler kazanır. Yuu Otosaka, gücünü kendi bencil çıkarları için kullanırken, karşısına Nao Tomori adında bir kız çıkar. Nao, onu yetenekli çocukların toplandığı bir okula davet eder. Hikaye basit bir güç fantezisi gibi başlasa da, zamanla fedakarlık, kayıp ve kader üzerine ağır bir dramaya dönüşür.', 
+                desc: 'Dünyada ergenlik dönemindeki az sayıda çocuk, bir meteor tozunun etkisiyle geçici süper güçler kazanır. Yuu Otosaka, bu güçleri kendi çıkarları için kullanırken Hoshinoumi Akademisi ile tanışır.', 
                 rating: '7.5' 
             },
             'Hunter x Hunter': { 
-                desc: 'Gon Freecss, öldüğünü sandığı babasının aslında dünyanın en büyük "Avcı"larından (Hunter) biri olduğunu öğrenir. Babasını bulmak için Avcı sınavına katılan Gon, burada hayat boyu sürecek dostluklar kurar. Kuralsız ve tehlikeli bir dünyada geçen bu macera, inanılmaz detaylı güç sistemi (Nen) ve her biri kendine has derinlikte olan düşmanlarıyla anime dünyasının en zekice kurgulanmış serilerinden biridir.', 
+                desc: 'Gon Freecss, öldüğünü sandığı babasının aslında dünyanın en büyük "Avcı"larından biri olduğunu öğrenir ve babasını bulmak için Avcı sınavına girer.', 
                 rating: '9.0' 
             },
             'Jujutsu Kaisen': { 
-                desc: 'İnsanların negatif duygularından beslenen "Lanetler", dünyada dehşet saçmaktadır. Yuji Itadori, arkadaşlarını kurtarmak için efsanevi lanet Sukuna\'nın parmağını yutar ve onun gücünü kendi bedeninde barındırmaya başlar. Yuji, hem kendi içindeki canavarı kontrol etmek hem de Jujutsu büyücüsü olarak diğer lanetleri yok etmek için karanlık ve aksiyon dolu bir savaşa katılır.', 
+                desc: 'İnsanların negatif duygularından beslenen "Lanetler", dünyada dehşet saçmaktadır. Yuji Itadori, lanetli bir tılsımı yutarak kendisini bu karanlık dünyanın içinde bulur.', 
                 rating: '8.5' 
             },
             'Gachakuta': { 
-                desc: 'Cennetten atılan çöplerin altında yaşayan insanların bulunduğu bir dünyada, Rudo işlemediği bir suç yüzünden "Çukur"a atılır. Orada "Cleaner" adı verilen ve çöpleri silahlara dönüştürebilen insanlarla tanışır. Rudo, intikam almak ve bu adaletsiz sistemi yıkmak için Çukur\'un derinliklerinden yukarıya doğru savaşarak tırmanmaya başlar. Muazzam sanatsal tarzı ve özgün dünyasıyla dikkat çeken bir seridir.', 
+                desc: 'Cennetten atılan çöplerin altında yaşayan insanların bulunduğu bir dünyada, haksız yere suçlanarak "Uçuruma" atılan Ludo\'nun hayatta kalma ve intikam mücadelesi.', 
                 rating: 'TBA' 
             },
             'One Piece': { 
-                desc: 'Monkey D. Luffy, vücudu lastik gibi esneyebilen genç bir çocuktur. Efsanevi korsan Gold Roger\'ın bıraktığı hazine olan "One Piece"i bulmak ve Korsanlar Kralı olmak için denize açılır. Luffy, kendine has yetenekleri olan "Hasır Şapka Korsanları" grubunu kurarak, adalet, hükümet, kölelik ve özgürlük gibi evrensel temaların işlendiği devasa bir dünyada bitmek bilmeyen bir maceraya atılır.', 
+                desc: 'Monkey D. Luffy, vücudu lastik gibi esneyebilen genç bir çocuktur. Efsanevi hazine One Piece\'i bularak Korsanlar Kralı olmak için arkadaşlarıyla beraber büyük bir maceraya atılır.', 
                 rating: '9.0' 
             },
             'Fullmetal Alchemist: Brotherhood': { 
-                desc: 'Edward ve Alphonse Elric kardeşler, ölen annelerini geri getirmek için simyanın en büyük tabusunu çiğnerler. Bedel olarak Edward bir kolunu ve bir bacağını, Alphonse ise tüm bedenini kaybeder. Eski hallerine dönmek için efsanevi "Felsefe Taşı"nı arayan kardeşler, yolculukları boyunca krallığın derinliklerine kök salmış karanlık bir komployu ve insan ruhunun sınırlarını keşfederler.', 
+                desc: 'Edward ve Alphonse Elric kardeşler, ölen annelerini geri getirmek için simyanın en büyük tabusunu çiğnerler ve bunun bedelini ağır öderler. Vücutlarını geri almak için Felsefe Taşı\'nın peşine düşerler.', 
                 rating: '9.1' 
             },
             'Guilty Crown': { 
-                desc: '2039 yılında Japonya, "Kıyamet Virüsü"nün ardından bir dış otorite (GHQ) tarafından kontrol edilmektedir. Shu Ouma adındaki çekingen bir lise öğrencisi, insanların ruhlarını silahlara (Void) dönüştürme gücü kazandığında, kendisini direniş grubu olan "Tabut Takımı"nın ve karmaşık bir savaşın ortasında bulur. Müzikleri ve görsel tarzıyla akıllarda kalan distopik bir dramdır.', 
+                desc: '2039 yılında Japonya, "Kıyamet Virüsü"nün ardından bir dış otorite tarafından kontrol edilmektedir. Shu Ouma, insanların "Ruhlarını" silaha dönüştürme gücünü kazanınca direnişe katılır.', 
                 rating: '7.1' 
             }
         };
@@ -707,7 +802,25 @@
             { title: "Bölüm 13: Umarım Bir Gün Tekrar Kavuşuruz", source: "https://kyanori-4.asia/file/tau-video/d0e98059-0f87-44cc-a959-34602bd201e8.mp4" }
         ];
 
-        const episodeGrid = document.getElementById('episodeGrid');
+        // Bleach State Management
+        let bleachCurrentSeason = 1;
+        let bleachCurrentRangeStart = 1;
+
+        // Specific Bleach Episode Titles for first 200
+        const bleachTitles = [
+            "Shinigami Olduğum Gün", "Shinigami'nin İşi", "Ağabey'in Dileği, Kız Kardeşin Dileği", "Lanetli Papağan", "Görünmez Düşmanı Yen!", "Ölümüne Dövüş! Ichigo vs. Ichigo", "Selamlar, Bir Peluş Oyuncaktan", "17 Haziran, Yağmurdaki Anı", "Yenilmez Düşman", "Hayalet Hastaneye Hücum!", "Efsanevi Quincy", "Nazik Sağ Kol", "Çiçek ve Hollow", "Sırt Sırta, Ölümüne Dövüş!", "Kon'un Büyük Planı", "Abaı Renji Karşılaşması!", "Ichigo Ölüyor!", "Geri Al! Shinigami Gücü!", "Ichigo Bir Hollow Oluyor!", "Ichimaru Gin'in Gölgesi", "Soul Society'e Giriş", "Shinigami'den Nefret Eden Adam", "Rukia'nın İdamına 14 Gün Kala", "Toplanma! 13 Takım", "Büyük Bir Patlamayla Merkeze Dalmak?", "Oluşum! En Kötü Etiket", "Ölümcül Darbeyi Vur!", "Hedeflenen Orihime", "Atılım! Shinigami'nin Kuşatma Ağı", "Renji'nin Yüzleşmesi", "Renji'nin Kararlılığı", "Yıldız ve Sokak Köpeği", "Mucize! Gizemli Yeni Kahraman", "Trajedi Şafağı", "Aizen Suikastı! Karanlık Yaklaşıyor", "Kenpachi Zaraki Yaklaşıyor!", "Savaşın Sebebi", "Umutsuzluk! Kırılan Zangetsu", "Ölümsüz Adam", "Gantetsu'nun Gördüğü Shinigami", "Yeniden Buluşma, Ichigo ve Rukia", "Yoruichi, Dans Eden Tanrıça!", "Kötü Shinigami", "Ishida'nın En Büyük Gücü!", "Sınırları Zorla!", "Akademi Günlerinin Gerçek Hatırası", "İntikamcılar", "Hitsugaya, Kükre!", "Rukia'nın Kabusu", "Uyanan Ejderha", "İdam Sabahı", "Renji vs. Byakuya", "Ichimaru Gin'in Günahı", "Gerçekleşen Bir Yemin! Rukia'yı Kurtar!", "En Güçlü Shinigami Birliği! Guru ve Öğrenci", "Süper Hızlı Savaş! Dövüşün Tanrıçasını Seç!", "Bin Kiraz Çiçeği! Zangetsu Gökyüzüne Yükseliyor", "Serbest Bırak! Siyah Kılıç, Mucizevi Güç", "İdamın Sonucu! Ichigo vs. Byakuya", "Aizen'in Tuzağı", "Rukia'nın Kurtarılışı", "Tüm Shinigamiler Toplanıyor!", "Momo'nun Kararlılığı", "Aizen'in İhaneti ve Korkunç Hırsı", "Soul Society'de Vedalaşma", "Yeni Dönem! Karakura Şehri'ne Dönüş", "Saldıran Bountlar!", "Gizemli Kadın, Yoshino", "Bount Saldırısı! Büyük Yıkım", "Ishida vs. Yoshino", "Karakura Şehri'nde Panik", "Su ve Havai Fişekler!", "Ichigo vs. Ririn", "Bountlar'ın Malikanesine Saldırı!", "Büyük Patlama! Suikastçı Ekibi", "Ishida'nın Kaybı ve Shinigami Dönüşü", "Sınırların Ötesindeki Güç!", "Karakura Şehri Shinigamileri Toplanıyor", "Savaş Alanında Ölüm Şoku!", "Kötü Şöhretli Bountların Sonu", "Gözetleme Kulesine Sızma!", "Soul Society'de Savaş Başlıyor", "Yoshino'nun Sonu", "Rukia'nın Dönüşü ve Shinigami İntikamı", "Byakuya vs. Kariya", "Sınırları Zorlayan Shinigami Gücü", "Kariya'nın Gizli Silahı", "Rukia'nın Kurtuluşu İçin Savaş!", "Ishida vs. Kariya", "Sıcak Savaşın Sonu", "Byakuya'nın Sırrı", "Bountların Gerçek Hedefi", "En Güçlü Bount Kariya!", "Ichigo vs. Jin Kariya", "Hitsugaya vs. Maki Ichinose", "Maki Ichinose'nin Geçmişi", "Ichigo ve Byakuya'nın Ortak Savaşı", "Aizen'in Kılıcı", "Renji'nin Mücadelesi", "En Son Karşılaşma", "Kariya'nın Sonu", "Ichigo'nun Seçimi", "Vizardlar Geliyor!", "Ulquiorra'nın Saldırısı", "Yammy vs. Ichigo", "Orihime Tehlikede!", "Grimmjow Jeagerjaquez", "Hitsugaya'nın Ekibi Karakura'da", "Ikkaku vs. Edrad", "Madarame Ikkaku'nun Bankai'si", "Hitsugaya vs. Shawlong", "Rangiku vs. Nakim", "Grimmjow vs. Ichigo", "Ichigo'nun Hollow Gücü", "Shinigami ve Vizardların Eğitimi", "Ichigo vs. Shinji Hirako", "Orihime'nin Kararlılığı", "Hollow Dünyasına Giriş", "Espadalar Toplanıyor", "Ulquiorra ve Orihime", "Hueco Mundo'ya Yolculuk", "Ichigo vs. Dordoni", "Cirucci vs. Ishida", "Pesche ve Dondochakka", "Gantenbainne vs. Chad", "Rukia vs. Aaroniero", "Kaien Shiba'nın Hatırası", "Ishida ve Renji vs. Szayelaporro", "Grimmjow'un Serbest Kalışı", "Ichigo vs. Grimmjow", "Grimmjow'un Sonu", "Nel'in Gerçek Formu", "Nnoitra vs. Ichigo", "Kenpachi Zaraki'nin Gelişi", "En Güçlü Kılıç Ustası", "Byakuya Kuchiki vs. Zommari", "Mayuri Kurotsuchi vs. Szayelaporro", "Yachiru'nun Öfkesi", "Amagai Shusuke'nin İhaneti", "Yeni Kaptan Geliyor", "Karakura Şehri'nde Suikast", "Üçüncü Takım'ın Sırrı", "Kasumi-Oji Ailesi", "Ichigo vs. Amagai", "Bakoto'nun Gücü", "Soul Society'de İsyan", "Hitsugaya'nın Kararı", "Kenpachi vs. Enryu", "Amagai'nin İntikamı", "Kibune'nin Sonu", "Prenses Rurichiyo", "Ichigo'nun Son Savaşı", "Amagai'nin Sonu", "110 Yıl Önceki Geçmiş", "Shinji Hirako ve Aizen", "Urahara Kisuke'nin Kaptanlığı", "Vizardların Doğuşu", "Aizen'in Gerçek Yüzü", "Karakura Şehri'nde Hazırlık", "Ichigo ve Ishida'nın Dönüşü", "Hueco Mundo'da Yeni Savaş", "Ulquiorra vs. Ichigo: Başlangıç", "Loly ve Menoly", "Yammy'nin Gücü", "Karakura Şehri'nde Büyük Savaş", "Espada No.1: Starrk", "Hitsugaya vs. Halibel", "Soi Fon vs. Barragan", "Kyoraku vs. Starrk", "Ukitake'nin Mücadelesi", "Aizen vs. Gotei 13", "Ichigo'nun Yeni Hollow Formu", "Ulquiorra'nın Son Anları", "Ichigo vs. Yammy", "Unohana Retsu'nun Gelişi", "Kenpachi ve Byakuya vs. Yammy", "Aizen'in Planı Devam Ediyor", "Ichigo'nun Karakura'ya Dönüşü", "Isshin Kurosaki'nin Sırrı", "Final Getsuga Tensho", "Aizen'in Evrimi", "Ichigo vs. Aizen: Karar Anı", "Mugetsu", "Aizen'in Mühürlenmesi", "Ichigo'nun Gücünü Kaybedişi", "Soul Society'de Huzur", "Yeni Bir Başlangıç"
+        ];
+
+        // Generate 200 Bleach episodes with titles
+        const bleachEpisodes = Array.from({ length: 200 }, (_, i) => ({
+            id: i + 1,
+            title: i < bleachTitles.length ? `Bölüm ${i + 1}: ${bleachTitles[i]}` : `Bölüm ${i + 1}: Bleach Macerası`,
+            source: null // Placeholder
+        }));
+
+        const episodeGridPlastic = document.getElementById('episodeGridPlastic');
+        const episodeGridBleach = document.getElementById('episodeGridBleach');
+        const bleachRangeSelector = document.getElementById('bleachRangeSelector');
         const videoModal = document.getElementById('videoModal');
         const infoModal = document.getElementById('infoModal');
         const videoPlayer = document.getElementById('player');
@@ -718,10 +831,9 @@
         const header = document.getElementById('mainHeader');
         const watchlistItems = document.getElementById('watchlistItems');
 
-        function initApp() {
-            // Init Episode Grid
-            episodeGrid.innerHTML = ''; 
-            plasticMemoriesEpisodes.forEach((ep) => {
+        function createEpisodeCards(episodes, gridElement, animeName) {
+            gridElement.innerHTML = '';
+            episodes.forEach((ep) => {
                 const card = document.createElement('div');
                 card.className = 'episode-card';
                 card.innerHTML = `
@@ -730,11 +842,53 @@
                     </div>
                     <div class="episode-info"><div class="episode-title">${ep.title}</div></div>
                 `;
-                card.onclick = () => ep.source ? openVideo(ep.source, ep.title, "Plastic Memories") : showToast("Bölüm mevcut değil.");
-                episodeGrid.appendChild(card);
+                card.onclick = () => ep.source ? openVideo(ep.source, ep.title, animeName) : showToast("Bölüm henüz mevcut değil.");
+                gridElement.appendChild(card);
             });
+        }
 
-            // Init Watchlist
+        // --- Bleach Specific Functions ---
+        function handleBleachSeasonChange(season) {
+            bleachCurrentSeason = parseInt(season);
+            bleachCurrentRangeStart = bleachCurrentSeason === 1 ? 1 : 101;
+            renderBleachControls();
+            renderBleachEpisodes();
+        }
+
+        function handleBleachRangeChange(start) {
+            bleachCurrentRangeStart = start;
+            renderBleachControls();
+            renderBleachEpisodes();
+        }
+
+        function renderBleachControls() {
+            bleachRangeSelector.innerHTML = '';
+            const seasonStart = bleachCurrentSeason === 1 ? 1 : 101;
+            const seasonEnd = bleachCurrentSeason === 1 ? 100 : 200;
+
+            for (let i = seasonStart; i <= seasonEnd; i += 20) {
+                const end = i + 19;
+                const btn = document.createElement('button');
+                btn.className = `range-btn ${bleachCurrentRangeStart === i ? 'active' : ''}`;
+                btn.textContent = `${i}–${end}`;
+                btn.onclick = () => handleBleachRangeChange(i);
+                bleachRangeSelector.appendChild(btn);
+            }
+        }
+
+        function renderBleachEpisodes() {
+            const filtered = bleachEpisodes.filter(ep => 
+                ep.id >= bleachCurrentRangeStart && ep.id < bleachCurrentRangeStart + 20
+            );
+            createEpisodeCards(filtered, episodeGridBleach, "Bleach");
+        }
+
+        // --- Core App Functions ---
+        function initApp() {
+            createEpisodeCards(plasticMemoriesEpisodes, episodeGridPlastic, "Plastic Memories");
+            renderBleachControls();
+            renderBleachEpisodes();
+
             watchlistItems.innerHTML = '';
             Object.keys(animeDatabase).forEach(name => {
                 const item = animeDatabase[name];

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pelinflix - Anime izliyoruz!</title>
-    <link rel="icon" type="image/png" href="https://fontmeme.com/permalink/260218/df7d552c.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
@@ -300,17 +299,23 @@
             color: var(--text-secondary);
         }
 
+        /* Updated Status Badge for Icon */
         .status-badge {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--accent-color);
             background: rgba(229, 9, 20, 0.1);
-            padding: 4px 10px;
-            border-radius: 4px;
+            padding: 6px;
+            border-radius: 6px;
             margin-left: 15px;
-            font-weight: 600;
-            opacity: 0.8;
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            opacity: 0.9;
+            transition: transform 0.2s ease;
+        }
+
+        .anime-ordered-list li:hover .status-badge {
+            transform: scale(1.1);
         }
 
         /* --- Episode Grid --- */
@@ -564,7 +569,12 @@
                 <ul class="anime-ordered-list">
                     <li class="completed">
                         <span class="anime-name">Attack on Titan</span>
-                        <span class="status-badge">İzlendi</span>
+                        <!-- Status Badge Updated to Red Checkmark in Square -->
+                        <span class="status-badge">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </span>
                     </li>
                     <li><span class="anime-name">Plastic Memories</span></li>
                     <li><span class="anime-name">Bleach</span></li>
@@ -707,6 +717,3 @@
     </script>
 </body>
 </html>
-
-
-

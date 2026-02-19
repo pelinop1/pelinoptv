@@ -100,8 +100,8 @@ let bleachCurrentRangeStart = 1;
 // Bleach Episodes 1-200 (add your source links below)
 const bleachEpisodes = [
     { id: 1, title: "Bölüm 1: Shinigami Olduğum Gün", source: "https://voxen-2.asia/file/tau-video/e886a847-b053-4ac3-a660-ebd1c154ceb0.mp4" },
-    { id: 2, title: "Bölüm 2: Shinigami'nin İşi", source: "" },
-    { id: 3, title: "Bölüm 3: Ağabey'in Dileği, Kız Kardeşin Dileği", source: "" },
+    { id: 2, title: "Bölüm 2: Shinigami'nin İşi", source: "https://tsuriko-2.asia/file/tau-video/82a5d2a3-3ccb-4d43-9776-fb9394c435a5.mp4" },
+    { id: 3, title: "Bölüm 3: Ağabey'in Dileği, Kız Kardeşin Dileği", source: "https://kiryuuin.icu/file/tau-video/ef599b12-e623-4786-97e4-2d8cab07c4f9.mp4" },
     { id: 4, title: "Bölüm 4: Lanetli Papağan", source: "" },
     { id: 5, title: "Bölüm 5: Görünmez Düşmanı Yen!", source: "" },
     { id: 6, title: "Bölüm 6: Ölümüne Dövüş! Ichigo vs. Ichigo", source: "" },

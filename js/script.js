@@ -102,7 +102,7 @@ const bleachEpisodes = [
     { id: 1, title: "Bölüm 1: Shinigami Olduğum Gün", source: "https://voxen-2.asia/file/tau-video/e886a847-b053-4ac3-a660-ebd1c154ceb0.mp4" },
     { id: 2, title: "Bölüm 2: Shinigami'nin İşi", source: "https://tsuriko-2.asia/file/tau-video/82a5d2a3-3ccb-4d43-9776-fb9394c435a5.mp4" },
     { id: 3, title: "Bölüm 3: Ağabey'in Dileği, Kız Kardeşin Dileği", source: "https://kiryuuin.icu/file/tau-video/ef599b12-e623-4786-97e4-2d8cab07c4f9.mp4" },
-    { id: 4, title: "Bölüm 4: Lanetli Muhabbet Kuşu", source: "https://killarya.icu/file/tau-video/4e7c7a65-8864-4011-8870-c7c2bc727ac8.mp4" },
+    { id: 4, title: "Bölüm 4: Lanetli Kuş", source: "https://killarya.icu/file/tau-video/4e7c7a65-8864-4011-8870-c7c2bc727ac8.mp4" },
     { id: 5, title: "Bölüm 5: Görünmez Düşmanı Yen!", source: "https://kamadotanjiro.cfd/file/tau-video/dac5bd38-35e6-4537-9114-0170c5332ac8.mp4" },
     { id: 6, title: "Bölüm 6: Ölümüne Dövüş! Ichigo vs. Ichigo", source: "https://midorane-4.asia/file/tau-video/0e8d0cb0-675d-40e8-a372-de94d93eacb4.mp4" },
     { id: 7, title: "Bölüm 7: Selamlar, Bir Peluş Oyuncaktan", source: "" },

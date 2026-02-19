@@ -683,6 +683,45 @@ function renderBleachEpisodes() {
     createEpisodeCards(filtered, episodeGridBleach, "Bleach");
 }
 
+// --- Watchlist Management ---
+const WATCHLIST_STORAGE_KEY = 'pelinflix_completed_anime';
+
+function getCompletedAnime() {
+    try {
+        const completed = localStorage.getItem(WATCHLIST_STORAGE_KEY);
+        return completed ? JSON.parse(completed) : [];
+    } catch (e) {
+        console.error('Error reading completed anime:', e);
+        return [];
+    }
+}
+
+function isAnimeCompleted(animeName) {
+    const completed = getCompletedAnime();
+    return completed.includes(animeName);
+}
+
+function toggleAnimeCompleted(animeName) {
+    try {
+        let completed = getCompletedAnime();
+        const index = completed.indexOf(animeName);
+        
+        if (index > -1) {
+            // Remove from completed
+            completed.splice(index, 1);
+        } else {
+            // Add to completed
+            completed.push(animeName);
+        }
+        
+        localStorage.setItem(WATCHLIST_STORAGE_KEY, JSON.stringify(completed));
+        return index === -1; // Return true if now completed
+    } catch (e) {
+        console.error('Error toggling anime completion:', e);
+        return false;
+    }
+}
+
 // --- Core App Functions ---
 function initApp() {
     createEpisodeCards(plasticMemoriesEpisodes, episodeGridPlastic, "Plastic Memories");
@@ -692,13 +731,44 @@ function initApp() {
     watchlistItems.innerHTML = '';
     Object.keys(animeDatabase).forEach(name => {
         const item = animeDatabase[name];
+        const isCompleted = isAnimeCompleted(name);
+        
         const li = document.createElement('li');
-        if (item.completed) li.className = 'completed';
+        li.className = isCompleted ? 'completed' : '';
+        li.setAttribute('data-anime-name', name);
+        
         li.innerHTML = `
             <span class="anime-name">${name}</span>
-            ${item.completed ? '<span class="status-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>' : ''}
+            <span class="status-badge ${isCompleted ? 'active' : ''}" data-anime-name="${name}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </span>
         `;
-        li.onclick = () => showAnimeInfo(name);
+        
+        // Click on anime name to show info
+        const animeName = li.querySelector('.anime-name');
+        animeName.onclick = (e) => {
+            e.stopPropagation();
+            showAnimeInfo(name);
+        };
+        
+        // Click on status badge to toggle completion
+        const statusBadge = li.querySelector('.status-badge');
+        statusBadge.onclick = (e) => {
+            e.stopPropagation();
+            const nowCompleted = toggleAnimeCompleted(name);
+            
+            // Update UI
+            if (nowCompleted) {
+                li.classList.add('completed');
+                statusBadge.classList.add('active');
+            } else {
+                li.classList.remove('completed');
+                statusBadge.classList.remove('active');
+            }
+        };
+        
         watchlistItems.appendChild(li);
     });
 }

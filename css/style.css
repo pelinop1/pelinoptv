@@ -338,8 +338,36 @@ main {
     border-radius: 6px;
     margin-left: 15px;
     border: 1px solid rgba(229, 9, 20, 0.2);
+    opacity: 0.4;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 30px;
+    min-height: 30px;
+}
+
+.status-badge:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+    border-color: rgba(229, 9, 20, 0.4);
+}
+
+.status-badge svg {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.status-badge.active {
     opacity: 0.9;
-    transition: transform 0.2s ease;
+    background: rgba(229, 9, 20, 0.15);
+    border-color: rgba(229, 9, 20, 0.3);
+}
+
+.status-badge.active svg {
+    opacity: 1;
+}
+
+.status-badge.active:hover {
+    opacity: 1;
 }
 
 /* --- Episode Grid & Controls --- */

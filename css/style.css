@@ -420,7 +420,7 @@ main {
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
     position: relative;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
@@ -428,6 +428,43 @@ main {
 .episode-card:hover {
     transform: scale(1.05);
     z-index: 10;
+}
+
+/* Watched Episode Styling */
+.episode-card.watched {
+    opacity: 0.7;
+    border: 2px solid rgba(229, 9, 20, 0.3);
+}
+
+.episode-card.watched:hover {
+    opacity: 0.85;
+}
+
+.watched-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(229, 9, 20, 0.95);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(229, 9, 20, 0.3);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    pointer-events: none;
+}
+
+.watched-badge::before {
+    content: '✓';
+    font-size: 0.9rem;
+    font-weight: 900;
 }
 
 .thumbnail-container {
@@ -445,6 +482,61 @@ main {
     color: rgba(255, 255, 255, 0.03);
     font-size: 2rem;
     font-weight: 900;
+}
+
+/* Watched Toggle Button */
+.watched-toggle {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 36px;
+    height: 36px;
+    background: rgba(20, 10, 10, 0.95);
+    border: 2px solid rgba(229, 9, 20, 0.4);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 6;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.2);
+}
+
+.watched-toggle:hover {
+    background: rgba(30, 15, 15, 0.98);
+    border-color: rgba(229, 9, 20, 0.7);
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(229, 9, 20, 0.4);
+}
+
+.watched-toggle svg {
+    opacity: 0;
+    transition: all 0.3s ease;
+    color: #e50914;
+    filter: drop-shadow(0 0 8px rgba(229, 9, 20, 0.8));
+    transform: scale(0.8);
+}
+
+.watched-toggle.active {
+    background: rgba(40, 10, 10, 0.98);
+    border-color: rgba(229, 9, 20, 0.9);
+    box-shadow: 
+        0 0 40px rgba(229, 9, 20, 0.6),
+        0 0 20px rgba(229, 9, 20, 0.4),
+        inset 0 0 20px rgba(229, 9, 20, 0.1);
+}
+
+.watched-toggle.active svg {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 12px rgba(229, 9, 20, 1)) 
+            drop-shadow(0 0 6px rgba(229, 9, 20, 0.8));
+}
+
+.watched-toggle:active {
+    transform: scale(0.95);
 }
 
 .play-overlay {

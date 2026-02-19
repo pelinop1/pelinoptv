@@ -78,19 +78,19 @@ const animeDatabase = {
 };
 
 const plasticMemoriesEpisodes = [
-    { title: "Bölüm 1: İlk Kez Selamlanan Ortak", source: "https://sakazuki.icu/file/tau-video/84680062-5171-4750-90ee-3fd711f7191f.mp4" },
-    { title: "Bölüm 2: Dışarıda Yağmur Yağmasını İstemiyorum", source: "https://renjiabari.asia/file/tau-video/331712cd-337f-4804-bf5b-8319ce500607.mp4" },
-    { title: "Bölüm 3: Beraber Yaşamaya Başladık", source: "https://rikafurude.asia/file/tau-video/1f781022-cbe4-4814-b61f-9fd0ec200a0d.mp4" },
-    { title: "Bölüm 4: Nasıl Gülümseyeceğini Bilmiyorum", source: "https://misakina.icu/file/tau-video/cee867bb-0c83-4e10-8b9e-be4931253f85.mp4" },
-    { title: "Bölüm 5: Senin İçin Ulaşmak İstediğim Söz", source: "https://yoroichi.asia/file/tau-video/eca49014-b7f9-425a-bb52-7f87f21b6f14.mp4" },
-    { title: "Bölüm 6: İkimize de Hoşgeldin", source: "https://kamadotanjiro.asia/file/tau-video/a6614a17-ca6f-4fa9-896c-f9aa4ac139be.mp4" },
-    { title: "Bölüm 7: Nasıl Randevu Alınacağını Öğrenmek", source: "https://yurexa-1.asia/file/tau-video/d1ec1ab1-220d-452f-bc3c-88f9c67ba280.mp4" },
-    { title: "Bölüm 8: Hiç Bilmediğim Bir Havai Fişek", source: "https://nezukami.cfd/file/tau-video/a05fa9e9-e80d-4cb8-a70b-080bf676310d.mp4" },
-    { title: "Bölüm 9: Duraktan Sonrası", source: "https://misakina.asia/file/tau-video/27fd1e22-69dc-4906-b003-c0f080af860b.mp4" },
-    { title: "Bölüm 10: Artık Ortak Değiliz", source: "https://misakina.cyou/file/tau-video/b74857cb-0a84-4bb0-bc36-bfdc183fbf05.mp4" },
-    { title: "Bölüm 11: Pirinç Omlet Günü", source: "https://nozume-1.asia/file/tau-video/ffcd4b44-875f-44de-baf7-95f422b31efe.mp4" },
-    { title: "Bölüm 12: Anılar Dolup Taşıyor", source: "https://meisura-1.asia/file/tau-video/2046e151-b6ca-44ac-ac03-748d4f6af6df.mp4" },
-    { title: "Bölüm 13: Umarım Bir Gün Tekrar Kavuşuruz", source: "https://kyanori-4.asia/file/tau-video/d0e98059-0f87-44cc-a959-34602bd201e8.mp4" }
+    { id: "pm-1", title: "Bölüm 1: İlk Kez Selamlanan Ortak", source: "https://sakazuki.icu/file/tau-video/84680062-5171-4750-90ee-3fd711f7191f.mp4" },
+    { id: "pm-2", title: "Bölüm 2: Dışarıda Yağmur Yağmasını İstemiyorum", source: "https://renjiabari.asia/file/tau-video/331712cd-337f-4804-bf5b-8319ce500607.mp4" },
+    { id: "pm-3", title: "Bölüm 3: Beraber Yaşamaya Başladık", source: "https://rikafurude.asia/file/tau-video/1f781022-cbe4-4814-b61f-9fd0ec200a0d.mp4" },
+    { id: "pm-4", title: "Bölüm 4: Nasıl Gülümseyeceğini Bilmiyorum", source: "https://misakina.icu/file/tau-video/cee867bb-0c83-4e10-8b9e-be4931253f85.mp4" },
+    { id: "pm-5", title: "Bölüm 5: Senin İçin Ulaşmak İstediğim Söz", source: "https://yoroichi.asia/file/tau-video/eca49014-b7f9-425a-bb52-7f87f21b6f14.mp4" },
+    { id: "pm-6", title: "Bölüm 6: İkimize de Hoşgeldin", source: "https://kamadotanjiro.asia/file/tau-video/a6614a17-ca6f-4fa9-896c-f9aa4ac139be.mp4" },
+    { id: "pm-7", title: "Bölüm 7: Nasıl Randevu Alınacağını Öğrenmek", source: "https://yurexa-1.asia/file/tau-video/d1ec1ab1-220d-452f-bc3c-88f9c67ba280.mp4" },
+    { id: "pm-8", title: "Bölüm 8: Hiç Bilmediğim Bir Havai Fişek", source: "https://nezukami.cfd/file/tau-video/a05fa9e9-e80d-4cb8-a70b-080bf676310d.mp4" },
+    { id: "pm-9", title: "Bölüm 9: Duraktan Sonrası", source: "https://misakina.asia/file/tau-video/27fd1e22-69dc-4906-b003-c0f080af860b.mp4" },
+    { id: "pm-10", title: "Bölüm 10: Artık Ortak Değiliz", source: "https://misakina.cyou/file/tau-video/b74857cb-0a84-4bb0-bc36-bfdc183fbf05.mp4" },
+    { id: "pm-11", title: "Bölüm 11: Pirinç Omlet Günü", source: "https://nozume-1.asia/file/tau-video/ffcd4b44-875f-44de-baf7-95f422b31efe.mp4" },
+    { id: "pm-12", title: "Bölüm 12: Anılar Dolup Taşıyor", source: "https://meisura-1.asia/file/tau-video/2046e151-b6ca-44ac-ac03-748d4f6af6df.mp4" },
+    { id: "pm-13", title: "Bölüm 13: Umarım Bir Gün Tekrar Kavuşuruz", source: "https://kyanori-4.asia/file/tau-video/d0e98059-0f87-44cc-a959-34602bd201e8.mp4" }
 ];
 
 // Bleach State Management
@@ -514,20 +514,134 @@ const toast = document.getElementById('toast');
 const header = document.getElementById('mainHeader');
 const watchlistItems = document.getElementById('watchlistItems');
 
+// --- Watched Episodes Management ---
+const WATCHED_STORAGE_KEY = 'pelinflix_watched_episodes';
+
+function getWatchedEpisodes() {
+    try {
+        const watched = localStorage.getItem(WATCHED_STORAGE_KEY);
+        return watched ? JSON.parse(watched) : {};
+    } catch (e) {
+        console.error('Error reading watched episodes:', e);
+        return {};
+    }
+}
+
+function markEpisodeAsWatched(animeName, episodeId) {
+    try {
+        const watched = getWatchedEpisodes();
+        if (!watched[animeName]) {
+            watched[animeName] = [];
+        }
+        if (!watched[animeName].includes(episodeId)) {
+            watched[animeName].push(episodeId);
+            localStorage.setItem(WATCHED_STORAGE_KEY, JSON.stringify(watched));
+        }
+    } catch (e) {
+        console.error('Error saving watched episode:', e);
+    }
+}
+
+function isEpisodeWatched(animeName, episodeId) {
+    const watched = getWatchedEpisodes();
+    return watched[animeName] && watched[animeName].includes(episodeId);
+}
+
 function createEpisodeCards(episodes, gridElement, animeName) {
     gridElement.innerHTML = '';
-    episodes.forEach((ep) => {
+    episodes.forEach((ep, index) => {
+        const episodeId = ep.id || `ep-${index + 1}`;
+        const isWatched = isEpisodeWatched(animeName, episodeId);
+        
         const card = document.createElement('div');
-        card.className = 'episode-card';
+        card.className = `episode-card ${isWatched ? 'watched' : ''}`;
+        card.setAttribute('data-anime', animeName);
+        card.setAttribute('data-episode-id', episodeId);
+        
         card.innerHTML = `
             <div class="thumbnail-container">
+                <button class="watched-toggle ${isWatched ? 'active' : ''}" data-anime="${animeName}" data-episode-id="${episodeId}" title="İzlendi olarak işaretle">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </button>
+                ${isWatched ? '<div class="watched-badge">İzlendi</div>' : ''}
                 <div class="play-overlay"><div class="play-icon"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
             </div>
             <div class="episode-info"><div class="episode-title">${ep.title}</div></div>
         `;
-        card.onclick = () => ep.source ? openVideo(ep.source, ep.title, animeName) : showToast("Bölüm henüz mevcut değil.");
+        
+        // Add click handler for the card (to play video)
+        card.onclick = (e) => {
+            // Don't trigger if clicking the toggle button
+            if (e.target.closest('.watched-toggle')) {
+                return;
+            }
+            if (ep.source) {
+                openVideo(ep.source, ep.title, animeName, episodeId);
+            } else {
+                showToast("Bölüm henüz mevcut değil.");
+            }
+        };
+        
+        // Add click handler for the toggle button
+        const toggleBtn = card.querySelector('.watched-toggle');
+        toggleBtn.onclick = (e) => {
+            e.stopPropagation(); // Prevent card click
+            toggleWatchedState(animeName, episodeId, card, toggleBtn);
+        };
+        
         gridElement.appendChild(card);
     });
+}
+
+function toggleWatchedState(animeName, episodeId, card, toggleBtn) {
+    const isCurrentlyWatched = isEpisodeWatched(animeName, episodeId);
+    
+    if (isCurrentlyWatched) {
+        // Unmark as watched
+        removeWatchedEpisode(animeName, episodeId);
+        card.classList.remove('watched');
+        toggleBtn.classList.remove('active');
+        
+        // Remove badge
+        const badge = card.querySelector('.watched-badge');
+        if (badge) {
+            badge.remove();
+        }
+    } else {
+        // Mark as watched
+        markEpisodeAsWatched(animeName, episodeId);
+        card.classList.add('watched');
+        toggleBtn.classList.add('active');
+        
+        // Add badge
+        const thumbnailContainer = card.querySelector('.thumbnail-container');
+        if (thumbnailContainer && !thumbnailContainer.querySelector('.watched-badge')) {
+            const badge = document.createElement('div');
+            badge.className = 'watched-badge';
+            badge.textContent = 'İzlendi';
+            // Insert after toggle button
+            const playOverlay = thumbnailContainer.querySelector('.play-overlay');
+            thumbnailContainer.insertBefore(badge, playOverlay);
+        }
+    }
+}
+
+function removeWatchedEpisode(animeName, episodeId) {
+    try {
+        const watched = getWatchedEpisodes();
+        if (watched[animeName]) {
+            watched[animeName] = watched[animeName].filter(id => id !== episodeId);
+            // Remove anime key if no episodes left
+            if (watched[animeName].length === 0) {
+                delete watched[animeName];
+            }
+            localStorage.setItem(WATCHED_STORAGE_KEY, JSON.stringify(watched));
+        }
+    } catch (e) {
+        console.error('Error removing watched episode:', e);
+    }
 }
 
 // --- Bleach Specific Functions ---
@@ -614,7 +728,7 @@ function showAnimeInfo(name) {
     document.body.style.overflow = 'hidden';
 }
 
-function openVideo(url, epTitle, animeName) {
+function openVideo(url, epTitle, animeName, episodeId) {
     playerEpTitle.textContent = epTitle;
     document.getElementById('playerAnimeName').textContent = animeName.toUpperCase();
     videoPlayer.src = url;
@@ -623,6 +737,24 @@ function openVideo(url, epTitle, animeName) {
     setTimeout(() => videoModal.classList.add('active'), 10);
     videoPlayer.play().catch(() => { });
     document.body.style.overflow = 'hidden';
+    
+    // Note: Episodes are no longer auto-marked as watched
+    // Users must manually toggle the watched state
+}
+
+// This function is no longer needed for auto-updating, but kept for compatibility
+function updateEpisodeCardWatchedState(animeName, episodeId) {
+    const card = document.querySelector(`[data-anime="${animeName}"][data-episode-id="${episodeId}"]`);
+    if (card && !card.classList.contains('watched')) {
+        card.classList.add('watched');
+        const thumbnailContainer = card.querySelector('.thumbnail-container');
+        if (thumbnailContainer && !thumbnailContainer.querySelector('.watched-badge')) {
+            const badge = document.createElement('div');
+            badge.className = 'watched-badge';
+            badge.textContent = 'İzlendi';
+            thumbnailContainer.insertBefore(badge, thumbnailContainer.firstChild);
+        }
+    }
 }
 
 function closeModal() {

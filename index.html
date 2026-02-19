@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,595 +8,12 @@
     <link rel="icon" type="image/png" href="https://fontmeme.com/permalink/260218/df7d552c.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #0a0a0a;
-            --surface-color: #1a1a1a;
-            --accent-color: #e50914;
-            --neon-purple: #bc13fe;
-            --text-primary: #ffffff;
-            --text-secondary: #a3a3a3;
-            --transition-speed: 0.3s;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* --- Header --- */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 0.8rem 5%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-            transition: background var(--transition-speed), padding var(--transition-speed);
-        }
-
-        header.scrolled {
-            background: rgba(10, 10, 10, 0.95);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding: 0.5rem 5%;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .logo-img {
-            height: 50px; 
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(229, 9, 20, 0.4));
-            transition: transform 0.3s ease;
-        }
-
-        .logo-container:hover .logo-img {
-            transform: scale(1.05);
-        }
-
-        nav {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            position: relative;
-            padding: 0.5rem 0;
-            transition: color var(--transition-speed);
-        }
-
-        .nav-link:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-link.active {
-            color: var(--text-primary);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-color);
-            transition: all var(--transition-speed);
-            transform: translateX(-50%);
-        }
-
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        /* --- Main Content --- */
-        main {
-            margin-top: 100px;
-            padding: 0 5% 5rem 5%;
-            min-height: 85vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .section {
-            display: none;
-            width: 100%;
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- Landing Page Styles --- */
-        .landing-container {
-            height: calc(80vh - 100px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .landing-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 1rem;
-            letter-spacing: -2px;
-        }
-
-        .landing-title span {
-            color: var(--accent-color);
-            text-shadow: 0 0 20px rgba(229, 9, 20, 0.4);
-        }
-
-        .landing-subtitle {
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            color: var(--text-secondary);
-            font-weight: 300;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        .neon-pelinop {
-            color: var(--neon-purple);
-            text-decoration: none;
-            font-weight: 600;
-            text-shadow: 0 0 5px rgba(188, 19, 254, 0.3);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .neon-pelinop:hover {
-            text-shadow: 0 0 12px rgba(188, 19, 254, 0.8), 0 0 20px rgba(188, 19, 254, 0.4);
-            color: #d866ff;
-        }
-
-        /* --- Info Card Styles --- */
-        .info-card {
-            background-color: var(--surface-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--accent-color);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-
-        .info-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .info-description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-
-        .info-meta {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 0.9rem;
-        }
-
-        .rating-badge {
-            background: #f5c518;
-            color: #000;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: 800;
-            font-size: 0.8rem;
-        }
-
-        .rating-value {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        /* --- Watchlist Section --- */
-        .watchlist-container {
-            padding-top: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .watchlist-title {
-            font-size: 2.5rem;
-            margin-bottom: 2.5rem;
-            font-family: 'Poppins', sans-serif;
-            border-bottom: 2px solid var(--accent-color);
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-
-        .anime-ordered-list {
-            list-style: none;
-            counter-reset: anime-counter;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .anime-ordered-list li {
-            counter-increment: anime-counter;
-            display: flex;
-            align-items: center;
-            padding: 1.2rem;
-            background: var(--surface-color);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            position: relative;
-            border: 1px solid transparent;
-            cursor: pointer;
-        }
-
-        .anime-ordered-list li:hover {
-            background: #222;
-            border-color: rgba(229, 9, 20, 0.3);
-            transform: translateX(10px);
-        }
-
-        .anime-ordered-list li::before {
-            content: counter(anime-counter);
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: var(--accent-color);
-            min-width: 40px;
-            margin-right: 20px;
-            opacity: 0.8;
-        }
-
-        .anime-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            flex-grow: 1;
-        }
-
-        .completed .anime-name {
-            text-decoration: line-through;
-            text-decoration-color: var(--accent-color);
-            text-decoration-thickness: 1.5px;
-            color: var(--text-secondary);
-        }
-
-        .status-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-color);
-            background: rgba(229, 9, 20, 0.1);
-            padding: 6px;
-            border-radius: 6px;
-            margin-left: 15px;
-            border: 1px solid rgba(229, 9, 20, 0.2);
-            opacity: 0.9;
-            transition: transform 0.2s ease;
-        }
-
-        /* --- Episode Grid & Controls --- */
-        .anime-header {
-            margin-bottom: 2rem;
-        }
-
-        .anime-header h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Season and Range Selectors */
-        .episode-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .season-select {
-            background-color: var(--surface-color);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 0.6rem 1rem;
-            border-radius: 8px;
-            font-weight: 600;
-            outline: none;
-            cursor: pointer;
-            transition: border-color 0.3s;
-        }
-
-        .season-select:focus {
-            border-color: var(--accent-color);
-        }
-
-        .range-selector {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .range-btn {
-            background-color: var(--surface-color);
-            color: var(--text-secondary);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .range-btn:hover {
-            border-color: rgba(255,255,255,0.3);
-            color: white;
-        }
-
-        .range-btn.active {
-            background-color: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 15px rgba(229, 9, 20, 0.3);
-        }
-
-        .episode-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .episode-card {
-            background-color: var(--surface-color);
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-
-        .episode-card:hover {
-            transform: scale(1.05);
-            z-index: 10;
-        }
-
-        .thumbnail-container {
-            aspect-ratio: 16/9;
-            background: linear-gradient(45deg, #1a1a1a, #333);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .thumbnail-container::before {
-            content: 'PELINFLIX';
-            position: absolute;
-            color: rgba(255,255,255,0.03);
-            font-size: 2rem;
-            font-weight: 900;
-        }
-
-        .play-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .episode-card:hover .play-overlay {
-            opacity: 1;
-        }
-
-        .play-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
-        }
-
-        .episode-info {
-            padding: 1rem;
-        }
-
-        .episode-title {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--text-primary);
-        }
-
-        /* --- Modals --- */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.98);
-            z-index: 9999;
-            display: none; 
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-content {
-            width: 95%;
-            max-width: 1100px;
-            position: relative;
-            background: #000;
-        }
-
-        /* Player Title Overlay */
-        .player-title-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem 2rem;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-            z-index: 10;
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .player-anime-name {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
-
-        .player-episode-name {
-            font-size: 1.25rem;
-            color: #fff;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        /* Info Modal Specific Styling */
-        .info-modal-box {
-            background-color: var(--surface-color);
-            border-radius: 12px;
-            padding: 2.5rem;
-            max-width: 650px;
-            width: 90%;
-            border-top: 4px solid var(--accent-color);
-            box-shadow: 0 10px 60px rgba(0,0,0,0.9);
-            position: relative;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: -50px;
-            right: 0;
-            color: white;
-            font-size: 2.5rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 10px;
-            z-index: 10001;
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
-
-        .info-modal-box .close-modal {
-            top: 10px;
-            right: 15px;
-            font-size: 2rem;
-            color: var(--text-secondary);
-        }
-
-        video {
-            width: 100%;
-            max-height: 85vh;
-            display: block;
-            outline: none;
-        }
-
-        /* --- Toast --- */
-        #toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--surface-color);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255,255,255,0.1);
-            display: none;
-            z-index: 3000;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from { transform: translate(-50%, 20px); opacity: 0; }
-            to { transform: translate(-50%, 0); opacity: 1; }
-        }
-
-        /* --- Responsive --- */
-        @media (max-width: 768px) {
-            header { padding: 0.8rem 1rem; }
-            nav { gap: 0.8rem; }
-            .nav-link { font-size: 0.75rem; }
-            main { margin-top: 80px; }
-            .player-episode-name { font-size: 1rem; }
-            .episode-controls { flex-direction: column; align-items: flex-start; }
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
     <header id="mainHeader">
@@ -613,9 +31,11 @@
         <!-- Home Page -->
         <section id="home" class="section active">
             <div class="landing-container">
-                <h1 class="landing-title">Welcome to <span>Pelinflix</span></h1>
+                <h1 class="landing-title">Welcome to <img src="https://fontmeme.com/permalink/260218/df7d552c.png"
+                        alt="Pelinflix" class="landing-logo"></h1>
                 <p class="landing-subtitle">
-                    <a href="https://www.twitch.tv/pelinop" target="_blank" class="neon-pelinop">Pelinop</a> anime izliyor
+                    <a href="https://www.twitch.tv/pelinop" target="_blank" class="neon-pelinop">Pelinop</a> anime
+                    izliyor
                 </p>
             </div>
         </section>
@@ -628,7 +48,8 @@
 
             <div class="info-card">
                 <div class="info-title">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-color);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-color);">
                         <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"></path>
                         <path d="M12 8v4"></path>
                         <path d="M12 16h.01"></path>
@@ -636,11 +57,23 @@
                     Hakkında
                 </div>
                 <p class="info-description">
-                    İnsan duygularını mükemmel bir şekilde taklit edebilen Giftia adlı androidlerin üretildiği bir gelecekte, bu varlıkların bir "son kullanma tarihi" vardır. 81.920 saati doldurduklarında, anıları bozulmaya başlar ve tehlikeli hale gelirler. Tsukasa Mizugaki, bu androidleri sahiplerinden nazikçe geri almakla görevli olan Terminal Servis'e katılır ve burada, hizmet süresinin sonuna yaklaşan gizemli bir Giftia olan Isla ile ortak olur.
+                    İnsan duygularını mükemmel bir şekilde taklit edebilen Giftia adlı androidlerin üretildiği bir
+                    gelecekte, bu varlıkların bir "son kullanma tarihi" vardır. 81.920 saati doldurduklarında, anıları
+                    bozulmaya başlar ve tehlikeli hale gelirler. Tsukasa Mizugaki, bu androidleri sahiplerinden nazikçe
+                    geri almakla görevli olan Terminal Servis'e katılır ve burada, hizmet süresinin sonuna yaklaşan
+                    gizemli bir Giftia olan Isla ile ortak olur.
                 </p>
                 <div class="info-meta">
                     <span class="rating-badge">IMDb</span>
                     <span class="rating-value">7.4 / 10</span>
+                    <span class="rating-divider">|</span>
+                    <span class="rating-badge pelin-badge">Pelin'in Notu</span>
+                    <span class="rating-value"><svg width="18" height="18" viewBox="0 0 24 24" fill="#e50914"
+                            stroke="#e50914" stroke-width="1" style="vertical-align: -2px; margin-right: 4px;">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
+                        </svg>TBA / 10</span>
                 </div>
             </div>
 
@@ -655,7 +88,8 @@
 
             <div class="info-card">
                 <div class="info-title">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-color);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-color);">
                         <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"></path>
                         <path d="M12 8v4"></path>
                         <path d="M12 16h.01"></path>
@@ -663,18 +97,31 @@
                     Hakkında
                 </div>
                 <p class="info-description">
-                    Kurosaki Ichigo, ruhları görebilen sıradan bir lise öğrencisiyken, bir kaza sonucu Yaralı bir Ölüm Tanrısı (Shinigami) olan Rukia Kuchiki'nin güçlerini devralır. Ichigo, "Hollow" adı verilen kötü ruhlarla savaşmak ve huzursuz ruhları huzura erdirmek zorunda kalırken, kendisini Soul Society adındaki ruhlar aleminin karmaşık ve tehlikeli politikalarının ortasında bulur.
+                    Kurosaki Ichigo, ruhları görebilen sıradan bir lise öğrencisiyken, bir kaza sonucu Yaralı bir Ölüm
+                    Tanrısı (Shinigami) olan Rukia Kuchiki'nin güçlerini devralır. Ichigo, "Hollow" adı verilen kötü
+                    ruhlarla savaşmak ve huzursuz ruhları huzura erdirmek zorunda kalırken, kendisini Soul Society
+                    adındaki ruhlar aleminin karmaşık ve tehlikeli politikalarının ortasında bulur.
                 </p>
                 <div class="info-meta">
                     <span class="rating-badge">IMDb</span>
                     <span class="rating-value">8.2 / 10</span>
+                    <span class="rating-divider">|</span>
+                    <span class="rating-badge pelin-badge">Pelin'in Notu</span>
+                    <span class="rating-value"><svg width="18" height="18" viewBox="0 0 24 24" fill="#e50914"
+                            stroke="#e50914" stroke-width="1" style="vertical-align: -2px; margin-right: 4px;">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
+                        </svg>TBA / 10</span>
                 </div>
             </div>
 
             <div class="episode-controls">
                 <select id="bleachSeasonSelect" class="season-select" onchange="handleBleachSeasonChange(this.value)">
-                    <option value="1">Season 1</option>
-                    <option value="2">Season 2</option>
+                    <option value="1">1-100</option>
+                    <option value="2">100-200</option>
+                    <option value="3">200-300</option>
+                    <option value="4">300-400</option>
                 </select>
                 <div id="bleachRangeSelector" class="range-selector">
                     <!-- Ranges populated by JS -->
@@ -703,7 +150,7 @@
                 <span class="player-episode-name" id="playerEpTitle">Bölüm Yükleniyor...</span>
             </div>
             <button class="close-modal" id="closeBtn">&times;</button>
-            <video id="player" controls playsinline crossorigin="anonymous">
+            <video id="player" controls playsinline>
                 <source src="" type="video/mp4">
             </video>
         </div>
@@ -713,7 +160,8 @@
     <div class="modal" id="infoModal">
         <div class="info-modal-box">
             <button class="close-modal" id="infoCloseBtn">&times;</button>
-            <div class="info-title" id="infoModalTitle" style="font-size: 1.5rem; margin-bottom: 1rem; font-family: 'Poppins', sans-serif;"></div>
+            <div class="info-title" id="infoModalTitle"
+                style="font-size: 1.5rem; margin-bottom: 1rem; font-family: 'Poppins', sans-serif;"></div>
             <p class="info-description" id="infoModalDesc" style="font-size: 1.05rem;"></p>
             <div class="info-meta" id="infoModalMeta" style="margin-top: 1.5rem;"></div>
         </div>
@@ -721,249 +169,7 @@
 
     <div id="toast">Bölüm henüz mevcut değil.</div>
 
-    <script>
-        const animeDatabase = {
-            'Attack on Titan': { 
-                desc: 'İnsanlığın devasa duvarlar arkasına çekilip "Titan" adı verilen devasa varlıklardan korunduğu bir dünyada, Eren Yeager ve arkadaşları duvarın yıkılmasıyla trajik bir mücadeleye atılırlar.', 
-                rating: '9.1', 
-                completed: true 
-            },
-            'Plastic Memories': { 
-                desc: 'İnsan duygularını mükemmel bir şekilde taklit edebilen Giftia adlı androidlerin üretildiği bir gelecekte, bu varlıkların bir "son kullanma tarihi" vardır. Tsukasa Mizugaki, bu androidleri sahiplerinden nazikçe geri almakla görevli olan Terminal Servis\'e katılır.', 
-                rating: '7.4' 
-            },
-            'Bleach': { 
-                desc: 'Kurosaki Ichigo, ruhları görebilen sıradan bir lise öğrencisiyken, bir kaza sonucu Yaralı bir Ölüm Tanrısı (Shinigami) olan Rukia Kuchiki\'nin güçlerini devralır ve ruhlar dünyasının koruyucusu olur.', 
-                rating: '8.2' 
-            },
-            'Naruto': { 
-                desc: 'İçinde mühürlenmiş olan Dokuz Kuyruklu Tilki nedeniyle köylüleri tarafından dışlanan genç ninja Naruto Uzumaki\'nin, köyün lideri olan Hokage olma hayalinin ve kendini kanıtlama çabasının hikayesidir.', 
-                rating: '8.4' 
-            },
-            'One Punch Man': { 
-                desc: 'Saitama, hobi olarak kahramanlık yapan inanılmaz güçlü bir adamdır. O kadar güçlüdür ki, en zorlu rakiplerini bile tek bir yumrukla yener, bu da onu büyük bir boşluğa sürükler.', 
-                rating: '8.7' 
-            },
-            'Evangelion': { 
-                desc: 'Dünya, "Melek" adı verilen devasa varlıklar tarafından tehdit edilmektedir. İnsanlığın son umudu olan EVA adlı dev robotları kullanmak için seçilen gençlerin psikolojik travmalarını konu alır.', 
-                rating: '8.5' 
-            },
-            'Death Note': { 
-                desc: 'Dahi bir lise öğrencisi olan Light Yagami, üzerine ismini yazdığı kişinin öleceği gizemli bir defter bulur. Light, bu güçle dünyayı suçlulardan temizlemeye karar verir.', 
-                rating: '8.9' 
-            },
-            'Black Clover': { 
-                desc: 'Herkesin büyü güçleriyle doğduğu bir dünyada, büyü kullanamayan tek kişi olan Asta, pes etmeyerek en büyük büyücü olan "Büyücü Kral" olma yolunda savaşır.', 
-                rating: '8.3' 
-            },
-            'Charlotte': { 
-                desc: 'Dünyada ergenlik dönemindeki az sayıda çocuk, bir meteor tozunun etkisiyle geçici süper güçler kazanır. Yuu Otosaka, bu güçleri kendi çıkarları için kullanırken Hoshinoumi Akademisi ile tanışır.', 
-                rating: '7.5' 
-            },
-            'Hunter x Hunter': { 
-                desc: 'Gon Freecss, öldüğünü sandığı babasının aslında dünyanın en büyük "Avcı"larından biri olduğunu öğrenir ve babasını bulmak için Avcı sınavına girer.', 
-                rating: '9.0' 
-            },
-            'Jujutsu Kaisen': { 
-                desc: 'İnsanların negatif duygularından beslenen "Lanetler", dünyada dehşet saçmaktadır. Yuji Itadori, lanetli bir tılsımı yutarak kendisini bu karanlık dünyanın içinde bulur.', 
-                rating: '8.5' 
-            },
-            'Gachakuta': { 
-                desc: 'Cennetten atılan çöplerin altında yaşayan insanların bulunduğu bir dünyada, haksız yere suçlanarak "Uçuruma" atılan Ludo\'nun hayatta kalma ve intikam mücadelesi.', 
-                rating: 'TBA' 
-            },
-            'One Piece': { 
-                desc: 'Monkey D. Luffy, vücudu lastik gibi esneyebilen genç bir çocuktur. Efsanevi hazine One Piece\'i bularak Korsanlar Kralı olmak için arkadaşlarıyla beraber büyük bir maceraya atılır.', 
-                rating: '9.0' 
-            },
-            'Fullmetal Alchemist: Brotherhood': { 
-                desc: 'Edward ve Alphonse Elric kardeşler, ölen annelerini geri getirmek için simyanın en büyük tabusunu çiğnerler ve bunun bedelini ağır öderler. Vücutlarını geri almak için Felsefe Taşı\'nın peşine düşerler.', 
-                rating: '9.1' 
-            },
-            'Guilty Crown': { 
-                desc: '2039 yılında Japonya, "Kıyamet Virüsü"nün ardından bir dış otorite tarafından kontrol edilmektedir. Shu Ouma, insanların "Ruhlarını" silaha dönüştürme gücünü kazanınca direnişe katılır.', 
-                rating: '7.1' 
-            }
-        };
-
-        const plasticMemoriesEpisodes = [
-            { title: "Bölüm 1: İlk Kez Selamlanan Ortak", source: "https://sakazuki.icu/file/tau-video/84680062-5171-4750-90ee-3fd711f7191f.mp4" },
-            { title: "Bölüm 2: Dışarıda Yağmur Yağmasını İstemiyorum", source: "https://renjiabari.asia/file/tau-video/331712cd-337f-4804-bf5b-8319ce500607.mp4" },
-            { title: "Bölüm 3: Beraber Yaşamaya Başladık", source: "https://rikafurude.asia/file/tau-video/1f781022-cbe4-4814-b61f-9fd0ec200a0d.mp4" },
-            { title: "Bölüm 4: Nasıl Gülümseyeceğini Bilmiyorum", source: "https://misakina.icu/file/tau-video/cee867bb-0c83-4e10-8b9e-be4931253f85.mp4" },
-            { title: "Bölüm 5: Senin İçin Ulaşmak İstediğim Söz", source: "https://yoroichi.asia/file/tau-video/eca49014-b7f9-425a-bb52-7f87f21b6f14.mp4" },
-            { title: "Bölüm 6: İkimize de Hoşgeldin", source: "https://kamadotanjiro.asia/file/tau-video/a6614a17-ca6f-4fa9-896c-f9aa4ac139be.mp4" },
-            { title: "Bölüm 7: Nasıl Randevu Alınacağını Öğrenmek", source: "https://yurexa-1.asia/file/tau-video/d1ec1ab1-220d-452f-bc3c-88f9c67ba280.mp4" },
-            { title: "Bölüm 8: Hiç Bilmediğim Bir Havai Fişek", source: "https://nezukami.cfd/file/tau-video/a05fa9e9-e80d-4cb8-a70b-080bf676310d.mp4" },
-            { title: "Bölüm 9: Duraktan Sonrası", source: "https://misakina.asia/file/tau-video/27fd1e22-69dc-4906-b003-c0f080af860b.mp4" },
-            { title: "Bölüm 10: Artık Ortak Değiliz", source: "https://misakina.cyou/file/tau-video/b74857cb-0a84-4bb0-bc36-bfdc183fbf05.mp4" },
-            { title: "Bölüm 11: Pirinç Omlet Günü", source: "https://nozume-1.asia/file/tau-video/ffcd4b44-875f-44de-baf7-95f422b31efe.mp4" },
-            { title: "Bölüm 12: Anılar Dolup Taşıyor", source: "https://meisura-1.asia/file/tau-video/2046e151-b6ca-44ac-ac03-748d4f6af6df.mp4" },
-            { title: "Bölüm 13: Umarım Bir Gün Tekrar Kavuşuruz", source: "https://kyanori-4.asia/file/tau-video/d0e98059-0f87-44cc-a959-34602bd201e8.mp4" }
-        ];
-
-        // Bleach State Management
-        let bleachCurrentSeason = 1;
-        let bleachCurrentRangeStart = 1;
-
-        // Specific Bleach Episode Titles for first 200
-        const bleachTitles = [
-            "Shinigami Olduğum Gün", "Shinigami'nin İşi", "Ağabey'in Dileği, Kız Kardeşin Dileği", "Lanetli Papağan", "Görünmez Düşmanı Yen!", "Ölümüne Dövüş! Ichigo vs. Ichigo", "Selamlar, Bir Peluş Oyuncaktan", "17 Haziran, Yağmurdaki Anı", "Yenilmez Düşman", "Hayalet Hastaneye Hücum!", "Efsanevi Quincy", "Nazik Sağ Kol", "Çiçek ve Hollow", "Sırt Sırta, Ölümüne Dövüş!", "Kon'un Büyük Planı", "Abaı Renji Karşılaşması!", "Ichigo Ölüyor!", "Geri Al! Shinigami Gücü!", "Ichigo Bir Hollow Oluyor!", "Ichimaru Gin'in Gölgesi", "Soul Society'e Giriş", "Shinigami'den Nefret Eden Adam", "Rukia'nın İdamına 14 Gün Kala", "Toplanma! 13 Takım", "Büyük Bir Patlamayla Merkeze Dalmak?", "Oluşum! En Kötü Etiket", "Ölümcül Darbeyi Vur!", "Hedeflenen Orihime", "Atılım! Shinigami'nin Kuşatma Ağı", "Renji'nin Yüzleşmesi", "Renji'nin Kararlılığı", "Yıldız ve Sokak Köpeği", "Mucize! Gizemli Yeni Kahraman", "Trajedi Şafağı", "Aizen Suikastı! Karanlık Yaklaşıyor", "Kenpachi Zaraki Yaklaşıyor!", "Savaşın Sebebi", "Umutsuzluk! Kırılan Zangetsu", "Ölümsüz Adam", "Gantetsu'nun Gördüğü Shinigami", "Yeniden Buluşma, Ichigo ve Rukia", "Yoruichi, Dans Eden Tanrıça!", "Kötü Shinigami", "Ishida'nın En Büyük Gücü!", "Sınırları Zorla!", "Akademi Günlerinin Gerçek Hatırası", "İntikamcılar", "Hitsugaya, Kükre!", "Rukia'nın Kabusu", "Uyanan Ejderha", "İdam Sabahı", "Renji vs. Byakuya", "Ichimaru Gin'in Günahı", "Gerçekleşen Bir Yemin! Rukia'yı Kurtar!", "En Güçlü Shinigami Birliği! Guru ve Öğrenci", "Süper Hızlı Savaş! Dövüşün Tanrıçasını Seç!", "Bin Kiraz Çiçeği! Zangetsu Gökyüzüne Yükseliyor", "Serbest Bırak! Siyah Kılıç, Mucizevi Güç", "İdamın Sonucu! Ichigo vs. Byakuya", "Aizen'in Tuzağı", "Rukia'nın Kurtarılışı", "Tüm Shinigamiler Toplanıyor!", "Momo'nun Kararlılığı", "Aizen'in İhaneti ve Korkunç Hırsı", "Soul Society'de Vedalaşma", "Yeni Dönem! Karakura Şehri'ne Dönüş", "Saldıran Bountlar!", "Gizemli Kadın, Yoshino", "Bount Saldırısı! Büyük Yıkım", "Ishida vs. Yoshino", "Karakura Şehri'nde Panik", "Su ve Havai Fişekler!", "Ichigo vs. Ririn", "Bountlar'ın Malikanesine Saldırı!", "Büyük Patlama! Suikastçı Ekibi", "Ishida'nın Kaybı ve Shinigami Dönüşü", "Sınırların Ötesindeki Güç!", "Karakura Şehri Shinigamileri Toplanıyor", "Savaş Alanında Ölüm Şoku!", "Kötü Şöhretli Bountların Sonu", "Gözetleme Kulesine Sızma!", "Soul Society'de Savaş Başlıyor", "Yoshino'nun Sonu", "Rukia'nın Dönüşü ve Shinigami İntikamı", "Byakuya vs. Kariya", "Sınırları Zorlayan Shinigami Gücü", "Kariya'nın Gizli Silahı", "Rukia'nın Kurtuluşu İçin Savaş!", "Ishida vs. Kariya", "Sıcak Savaşın Sonu", "Byakuya'nın Sırrı", "Bountların Gerçek Hedefi", "En Güçlü Bount Kariya!", "Ichigo vs. Jin Kariya", "Hitsugaya vs. Maki Ichinose", "Maki Ichinose'nin Geçmişi", "Ichigo ve Byakuya'nın Ortak Savaşı", "Aizen'in Kılıcı", "Renji'nin Mücadelesi", "En Son Karşılaşma", "Kariya'nın Sonu", "Ichigo'nun Seçimi", "Vizardlar Geliyor!", "Ulquiorra'nın Saldırısı", "Yammy vs. Ichigo", "Orihime Tehlikede!", "Grimmjow Jeagerjaquez", "Hitsugaya'nın Ekibi Karakura'da", "Ikkaku vs. Edrad", "Madarame Ikkaku'nun Bankai'si", "Hitsugaya vs. Shawlong", "Rangiku vs. Nakim", "Grimmjow vs. Ichigo", "Ichigo'nun Hollow Gücü", "Shinigami ve Vizardların Eğitimi", "Ichigo vs. Shinji Hirako", "Orihime'nin Kararlılığı", "Hollow Dünyasına Giriş", "Espadalar Toplanıyor", "Ulquiorra ve Orihime", "Hueco Mundo'ya Yolculuk", "Ichigo vs. Dordoni", "Cirucci vs. Ishida", "Pesche ve Dondochakka", "Gantenbainne vs. Chad", "Rukia vs. Aaroniero", "Kaien Shiba'nın Hatırası", "Ishida ve Renji vs. Szayelaporro", "Grimmjow'un Serbest Kalışı", "Ichigo vs. Grimmjow", "Grimmjow'un Sonu", "Nel'in Gerçek Formu", "Nnoitra vs. Ichigo", "Kenpachi Zaraki'nin Gelişi", "En Güçlü Kılıç Ustası", "Byakuya Kuchiki vs. Zommari", "Mayuri Kurotsuchi vs. Szayelaporro", "Yachiru'nun Öfkesi", "Amagai Shusuke'nin İhaneti", "Yeni Kaptan Geliyor", "Karakura Şehri'nde Suikast", "Üçüncü Takım'ın Sırrı", "Kasumi-Oji Ailesi", "Ichigo vs. Amagai", "Bakoto'nun Gücü", "Soul Society'de İsyan", "Hitsugaya'nın Kararı", "Kenpachi vs. Enryu", "Amagai'nin İntikamı", "Kibune'nin Sonu", "Prenses Rurichiyo", "Ichigo'nun Son Savaşı", "Amagai'nin Sonu", "110 Yıl Önceki Geçmiş", "Shinji Hirako ve Aizen", "Urahara Kisuke'nin Kaptanlığı", "Vizardların Doğuşu", "Aizen'in Gerçek Yüzü", "Karakura Şehri'nde Hazırlık", "Ichigo ve Ishida'nın Dönüşü", "Hueco Mundo'da Yeni Savaş", "Ulquiorra vs. Ichigo: Başlangıç", "Loly ve Menoly", "Yammy'nin Gücü", "Karakura Şehri'nde Büyük Savaş", "Espada No.1: Starrk", "Hitsugaya vs. Halibel", "Soi Fon vs. Barragan", "Kyoraku vs. Starrk", "Ukitake'nin Mücadelesi", "Aizen vs. Gotei 13", "Ichigo'nun Yeni Hollow Formu", "Ulquiorra'nın Son Anları", "Ichigo vs. Yammy", "Unohana Retsu'nun Gelişi", "Kenpachi ve Byakuya vs. Yammy", "Aizen'in Planı Devam Ediyor", "Ichigo'nun Karakura'ya Dönüşü", "Isshin Kurosaki'nin Sırrı", "Final Getsuga Tensho", "Aizen'in Evrimi", "Ichigo vs. Aizen: Karar Anı", "Mugetsu", "Aizen'in Mühürlenmesi", "Ichigo'nun Gücünü Kaybedişi", "Soul Society'de Huzur", "Yeni Bir Başlangıç"
-        ];
-
-        // Generate 200 Bleach episodes with titles
-        const bleachEpisodes = Array.from({ length: 200 }, (_, i) => ({
-            id: i + 1,
-            title: i < bleachTitles.length ? `Bölüm ${i + 1}: ${bleachTitles[i]}` : `Bölüm ${i + 1}: Bleach Macerası`,
-            source: null // Placeholder
-        }));
-
-        const episodeGridPlastic = document.getElementById('episodeGridPlastic');
-        const episodeGridBleach = document.getElementById('episodeGridBleach');
-        const bleachRangeSelector = document.getElementById('bleachRangeSelector');
-        const videoModal = document.getElementById('videoModal');
-        const infoModal = document.getElementById('infoModal');
-        const videoPlayer = document.getElementById('player');
-        const playerEpTitle = document.getElementById('playerEpTitle');
-        const closeBtn = document.getElementById('closeBtn');
-        const infoCloseBtn = document.getElementById('infoCloseBtn');
-        const toast = document.getElementById('toast');
-        const header = document.getElementById('mainHeader');
-        const watchlistItems = document.getElementById('watchlistItems');
-
-        function createEpisodeCards(episodes, gridElement, animeName) {
-            gridElement.innerHTML = '';
-            episodes.forEach((ep) => {
-                const card = document.createElement('div');
-                card.className = 'episode-card';
-                card.innerHTML = `
-                    <div class="thumbnail-container">
-                        <div class="play-overlay"><div class="play-icon"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-                    </div>
-                    <div class="episode-info"><div class="episode-title">${ep.title}</div></div>
-                `;
-                card.onclick = () => ep.source ? openVideo(ep.source, ep.title, animeName) : showToast("Bölüm henüz mevcut değil.");
-                gridElement.appendChild(card);
-            });
-        }
-
-        // --- Bleach Specific Functions ---
-        function handleBleachSeasonChange(season) {
-            bleachCurrentSeason = parseInt(season);
-            bleachCurrentRangeStart = bleachCurrentSeason === 1 ? 1 : 101;
-            renderBleachControls();
-            renderBleachEpisodes();
-        }
-
-        function handleBleachRangeChange(start) {
-            bleachCurrentRangeStart = start;
-            renderBleachControls();
-            renderBleachEpisodes();
-        }
-
-        function renderBleachControls() {
-            bleachRangeSelector.innerHTML = '';
-            const seasonStart = bleachCurrentSeason === 1 ? 1 : 101;
-            const seasonEnd = bleachCurrentSeason === 1 ? 100 : 200;
-
-            for (let i = seasonStart; i <= seasonEnd; i += 20) {
-                const end = i + 19;
-                const btn = document.createElement('button');
-                btn.className = `range-btn ${bleachCurrentRangeStart === i ? 'active' : ''}`;
-                btn.textContent = `${i}–${end}`;
-                btn.onclick = () => handleBleachRangeChange(i);
-                bleachRangeSelector.appendChild(btn);
-            }
-        }
-
-        function renderBleachEpisodes() {
-            const filtered = bleachEpisodes.filter(ep => 
-                ep.id >= bleachCurrentRangeStart && ep.id < bleachCurrentRangeStart + 20
-            );
-            createEpisodeCards(filtered, episodeGridBleach, "Bleach");
-        }
-
-        // --- Core App Functions ---
-        function initApp() {
-            createEpisodeCards(plasticMemoriesEpisodes, episodeGridPlastic, "Plastic Memories");
-            renderBleachControls();
-            renderBleachEpisodes();
-
-            watchlistItems.innerHTML = '';
-            Object.keys(animeDatabase).forEach(name => {
-                const item = animeDatabase[name];
-                const li = document.createElement('li');
-                if (item.completed) li.className = 'completed';
-                li.innerHTML = `
-                    <span class="anime-name">${name}</span>
-                    ${item.completed ? '<span class="status-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>' : ''}
-                `;
-                li.onclick = () => showAnimeInfo(name);
-                watchlistItems.appendChild(li);
-            });
-        }
-
-        function switchSection(sectionId, element) {
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            if (element) element.classList.add('active');
-            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function showAnimeInfo(name) {
-            const data = animeDatabase[name];
-            if (!data) return;
-            document.getElementById('infoModalTitle').textContent = name;
-            document.getElementById('infoModalDesc').textContent = data.desc;
-            document.getElementById('infoModalMeta').innerHTML = `
-                <span class="rating-badge">IMDb</span>
-                <span class="rating-value">${data.rating} / 10</span>
-            `;
-            infoModal.style.display = 'flex';
-            setTimeout(() => infoModal.classList.add('active'), 10);
-            document.body.style.overflow = 'hidden';
-        }
-
-        function openVideo(url, epTitle, animeName) {
-            playerEpTitle.textContent = epTitle;
-            document.getElementById('playerAnimeName').textContent = animeName.toUpperCase();
-            videoPlayer.src = url;
-            videoPlayer.load();
-            videoModal.style.display = 'flex';
-            setTimeout(() => videoModal.classList.add('active'), 10);
-            videoPlayer.play().catch(() => {});
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        function closeModal() {
-            [videoModal, infoModal].forEach(m => m.classList.remove('active'));
-            videoPlayer.pause();
-            setTimeout(() => {
-                videoModal.style.display = 'none';
-                infoModal.style.display = 'none';
-                videoPlayer.src = "";
-            }, 300);
-            document.body.style.overflow = 'auto'; 
-        }
-
-        closeBtn.onclick = closeModal;
-        infoCloseBtn.onclick = closeModal;
-        window.onclick = (e) => { if (e.target.classList.contains('modal')) closeModal(); };
-        document.onkeydown = (e) => { if (e.key === 'Escape') closeModal(); };
-
-        function showToast(msg) {
-            toast.textContent = msg;
-            toast.style.display = 'block';
-            setTimeout(() => toast.style.display = 'none', 3000);
-        }
-
-        window.onscroll = () => {
-            if (window.scrollY > 50) header.classList.add('scrolled');
-            else header.classList.remove('scrolled');
-        };
-
-        document.addEventListener('DOMContentLoaded', initApp);
-    </script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>

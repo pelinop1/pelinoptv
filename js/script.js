@@ -1,6 +1,6 @@
 const animeDatabase = {
     'Attack on Titan': {
-        desc: 'İnsanlığın devasa duvarlar arkasına çekilip "Titan" adı verilen devasa varlıklardan korunduğu bir dünyada, Eren Yeager ve arkadaşları duvarın yıkılmasıyla trajik bir mücadeleye atılırlar.',
+        desc: 'İnsanlığın devasa duvarlar arkasına çekilip "Titan" adı verilen devasa varlıklardan korunduğu bir dünyada,Eren Yeager ve arkadaşları duvarın yıkılmasıyla trajik bir mücadeleye atılırlar.',
         rating: '9.1',
         pelinRating: '10',
         completed: true

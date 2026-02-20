@@ -8,7 +8,7 @@ const animeDatabase = {
     'Plastic Memories': {
         desc: 'İnsan duygularını mükemmel bir şekilde taklit edebilen Giftia adlı androidlerin üretildiği bir gelecekte, bu varlıkların bir "son kullanma tarihi" vardır. Tsukasa Mizugaki, bu androidleri sahiplerinden nazikçe geri almakla görevli olan Terminal Servis\'e katılır.',
         rating: '7.4',
-        pelinRating: 'TBA'
+        pelinRating: '2'
     },
     'Bleach': {
         desc: 'Kurosaki Ichigo, ruhları görebilen sıradan bir lise öğrencisiyken, bir kaza sonucu Yaralı bir Ölüm Tanrısı (Shinigami) olan Rukia Kuchiki\'nin güçlerini devralır ve ruhlar dünyasının koruyucusu olur.',
@@ -77,21 +77,6 @@ const animeDatabase = {
     }
 };
 
-const plasticMemoriesEpisodes = [
-    { id: "pm-1", title: "Bölüm 1: İlk Kez Selamlanan Ortak", source: "https://sakazuki.icu/file/tau-video/84680062-5171-4750-90ee-3fd711f7191f.mp4" },
-    { id: "pm-2", title: "Bölüm 2: Dışarıda Yağmur Yağmasını İstemiyorum", source: "https://renjiabari.asia/file/tau-video/331712cd-337f-4804-bf5b-8319ce500607.mp4" },
-    { id: "pm-3", title: "Bölüm 3: Beraber Yaşamaya Başladık", source: "https://rikafurude.asia/file/tau-video/1f781022-cbe4-4814-b61f-9fd0ec200a0d.mp4" },
-    { id: "pm-4", title: "Bölüm 4: Nasıl Gülümseyeceğini Bilmiyorum", source: "https://misakina.icu/file/tau-video/cee867bb-0c83-4e10-8b9e-be4931253f85.mp4" },
-    { id: "pm-5", title: "Bölüm 5: Senin İçin Ulaşmak İstediğim Söz", source: "https://yoroichi.asia/file/tau-video/eca49014-b7f9-425a-bb52-7f87f21b6f14.mp4" },
-    { id: "pm-6", title: "Bölüm 6: İkimize de Hoşgeldin", source: "https://kamadotanjiro.asia/file/tau-video/a6614a17-ca6f-4fa9-896c-f9aa4ac139be.mp4" },
-    { id: "pm-7", title: "Bölüm 7: Nasıl Randevu Alınacağını Öğrenmek", source: "https://yurexa-1.asia/file/tau-video/d1ec1ab1-220d-452f-bc3c-88f9c67ba280.mp4" },
-    { id: "pm-8", title: "Bölüm 8: Hiç Bilmediğim Bir Havai Fişek", source: "https://nezukami.cfd/file/tau-video/a05fa9e9-e80d-4cb8-a70b-080bf676310d.mp4" },
-    { id: "pm-9", title: "Bölüm 9: Duraktan Sonrası", source: "https://misakina.asia/file/tau-video/27fd1e22-69dc-4906-b003-c0f080af860b.mp4" },
-    { id: "pm-10", title: "Bölüm 10: Artık Ortak Değiliz", source: "https://misakina.cyou/file/tau-video/b74857cb-0a84-4bb0-bc36-bfdc183fbf05.mp4" },
-    { id: "pm-11", title: "Bölüm 11: Pirinç Omlet Günü", source: "https://nozume-1.asia/file/tau-video/ffcd4b44-875f-44de-baf7-95f422b31efe.mp4" },
-    { id: "pm-12", title: "Bölüm 12: Anılar Dolup Taşıyor", source: "https://meisura-1.asia/file/tau-video/2046e151-b6ca-44ac-ac03-748d4f6af6df.mp4" },
-    { id: "pm-13", title: "Bölüm 13: Umarım Bir Gün Tekrar Kavuşuruz", source: "https://kyanori-4.asia/file/tau-video/d0e98059-0f87-44cc-a959-34602bd201e8.mp4" }
-];
 
 // Bleach State Management
 let bleachCurrentSeason = 1;
@@ -501,7 +486,7 @@ const bleachEpisodes = [
     { id: 400, title: "Bölüm 400: Bleach Macerası", source: "" },
 ];
 
-const episodeGridPlastic = document.getElementById('episodeGridPlastic');
+
 const episodeGridBleach = document.getElementById('episodeGridBleach');
 const bleachRangeSelector = document.getElementById('bleachRangeSelector');
 const videoModal = document.getElementById('videoModal');
@@ -552,12 +537,12 @@ function createEpisodeCards(episodes, gridElement, animeName) {
     episodes.forEach((ep, index) => {
         const episodeId = ep.id || `ep-${index + 1}`;
         const isWatched = isEpisodeWatched(animeName, episodeId);
-        
+
         const card = document.createElement('div');
         card.className = `episode-card ${isWatched ? 'watched' : ''}`;
         card.setAttribute('data-anime', animeName);
         card.setAttribute('data-episode-id', episodeId);
-        
+
         card.innerHTML = `
             <div class="thumbnail-container">
                 <button class="watched-toggle ${isWatched ? 'active' : ''}" data-anime="${animeName}" data-episode-id="${episodeId}" title="İzlendi olarak işaretle">
@@ -570,7 +555,7 @@ function createEpisodeCards(episodes, gridElement, animeName) {
             </div>
             <div class="episode-info"><div class="episode-title">${ep.title}</div></div>
         `;
-        
+
         // Add click handler for the card (to play video)
         card.onclick = (e) => {
             // Don't trigger if clicking the toggle button
@@ -583,27 +568,27 @@ function createEpisodeCards(episodes, gridElement, animeName) {
                 showToast("Bölüm henüz mevcut değil.");
             }
         };
-        
+
         // Add click handler for the toggle button
         const toggleBtn = card.querySelector('.watched-toggle');
         toggleBtn.onclick = (e) => {
             e.stopPropagation(); // Prevent card click
             toggleWatchedState(animeName, episodeId, card, toggleBtn);
         };
-        
+
         gridElement.appendChild(card);
     });
 }
 
 function toggleWatchedState(animeName, episodeId, card, toggleBtn) {
     const isCurrentlyWatched = isEpisodeWatched(animeName, episodeId);
-    
+
     if (isCurrentlyWatched) {
         // Unmark as watched
         removeWatchedEpisode(animeName, episodeId);
         card.classList.remove('watched');
         toggleBtn.classList.remove('active');
-        
+
         // Remove badge
         const badge = card.querySelector('.watched-badge');
         if (badge) {
@@ -614,7 +599,7 @@ function toggleWatchedState(animeName, episodeId, card, toggleBtn) {
         markEpisodeAsWatched(animeName, episodeId);
         card.classList.add('watched');
         toggleBtn.classList.add('active');
-        
+
         // Add badge
         const thumbnailContainer = card.querySelector('.thumbnail-container');
         if (thumbnailContainer && !thumbnailContainer.querySelector('.watched-badge')) {
@@ -684,91 +669,66 @@ function renderBleachEpisodes() {
 }
 
 // --- Watchlist Management ---
-const WATCHLIST_STORAGE_KEY = 'pelinflix_completed_anime';
-
-function getCompletedAnime() {
-    try {
-        const completed = localStorage.getItem(WATCHLIST_STORAGE_KEY);
-        return completed ? JSON.parse(completed) : [];
-    } catch (e) {
-        console.error('Error reading completed anime:', e);
-        return [];
-    }
-}
-
-function isAnimeCompleted(animeName) {
-    const completed = getCompletedAnime();
-    return completed.includes(animeName);
-}
-
-function toggleAnimeCompleted(animeName) {
-    try {
-        let completed = getCompletedAnime();
-        const index = completed.indexOf(animeName);
-        
-        if (index > -1) {
-            // Remove from completed
-            completed.splice(index, 1);
-        } else {
-            // Add to completed
-            completed.push(animeName);
-        }
-        
-        localStorage.setItem(WATCHLIST_STORAGE_KEY, JSON.stringify(completed));
-        return index === -1; // Return true if now completed
-    } catch (e) {
-        console.error('Error toggling anime completion:', e);
-        return false;
-    }
-}
+const watchlistData = [
+    { title: "Attack on Titan", watched: true },
+    { title: "Plastic Memories", watched: true },
+    { title: "Bleach", watched: false },
+    { title: "Chainsaw Man", watched: false },
+    { title: "Kakegurui", watched: false },
+    { title: "Death Parade", watched: false },
+    { title: "Hell's Paradise", watched: false },
+    { title: "The Cockpit", watched: false },
+    { title: "No Game No Life", watched: false },
+    { title: "Death Note", watched: false },
+    { title: "One Punch Man", watched: false },
+    { title: "Vinland Saga", watched: false },
+    { title: "Neon Genesis Evangelion", watched: false },
+    { title: "Guilty Crown", watched: false },
+    { title: "Steins;Gate", watched: false },
+    { title: "Jujutsu Kaisen", watched: false },
+    { title: "Seven Deadly Sins", watched: false },
+    { title: "Fullmetal Alchemist Brotherhood", watched: false },
+    { title: "Parasyte", watched: false },
+    { title: "Demon Slayer", watched: false },
+    { title: "Monster", watched: false },
+    { title: "Black Clover", watched: false },
+    { title: "Naruto", watched: false },
+    { title: "Hunter x Hunter", watched: false },
+    { title: "Gachiakuta", watched: false },
+    { title: "One Piece", watched: false }
+];
 
 // --- Core App Functions ---
 function initApp() {
-    createEpisodeCards(plasticMemoriesEpisodes, episodeGridPlastic, "Plastic Memories");
+
     renderBleachControls();
     renderBleachEpisodes();
 
     watchlistItems.innerHTML = '';
-    Object.keys(animeDatabase).forEach(name => {
-        const item = animeDatabase[name];
-        const isCompleted = isAnimeCompleted(name);
-        
+    watchlistData.forEach(item => {
+        const name = item.title;
+        const isWatched = item.watched;
+
         const li = document.createElement('li');
-        li.className = isCompleted ? 'completed' : '';
+        li.className = isWatched ? 'completed' : '';
         li.setAttribute('data-anime-name', name);
-        
+
         li.innerHTML = `
             <span class="anime-name">${name}</span>
-            <span class="status-badge ${isCompleted ? 'active' : ''}" data-anime-name="${name}">
+            <span class="status-badge ${isWatched ? 'active' : ''}" data-anime-name="${name}">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
             </span>
         `;
-        
+
         // Click on anime name to show info
         const animeName = li.querySelector('.anime-name');
         animeName.onclick = (e) => {
             e.stopPropagation();
             showAnimeInfo(name);
         };
-        
-        // Click on status badge to toggle completion
-        const statusBadge = li.querySelector('.status-badge');
-        statusBadge.onclick = (e) => {
-            e.stopPropagation();
-            const nowCompleted = toggleAnimeCompleted(name);
-            
-            // Update UI
-            if (nowCompleted) {
-                li.classList.add('completed');
-                statusBadge.classList.add('active');
-            } else {
-                li.classList.remove('completed');
-                statusBadge.classList.remove('active');
-            }
-        };
-        
+
         watchlistItems.appendChild(li);
     });
 }
@@ -807,7 +767,7 @@ function openVideo(url, epTitle, animeName, episodeId) {
     setTimeout(() => videoModal.classList.add('active'), 10);
     videoPlayer.play().catch(() => { });
     document.body.style.overflow = 'hidden';
-    
+
     // Note: Episodes are no longer auto-marked as watched
     // Users must manually toggle the watched state
 }

@@ -85,11 +85,11 @@ const animeDatabase = {
 
 // Berserk Episodes (5 episodes, 1997 series)
 const berserkEpisodes = [
-    { id: 1, title: "Bölüm 1: Kara Kılıç Ustası", source: "https://de2---vn-t9g4tsan-5qcl.yeshi.eu.org/animes/berserk/1/1-7081593322405367809-1080p.mp4" },
-    { id: 2, title: "Bölüm 2: Şahin Tugayı", source: "https://de2---vn-t9g4tsan-5qcl.yeshi.eu.org/animes/berserk/1/2-7081593322405367809-1080p.mp4" },
-    { id: 3, title: "Bölüm 3: İlk Savaş", source: "https://de2---vn-t9g4tsan-5qcl.yeshi.eu.org/animes/berserk/1/3-7081593322405367809-1080p.mp4" },
-    { id: 4, title: "Bölüm 4: Tanrının Eli", source: "https://de2---vn-t9g4tsan-5qcl.yeshi.eu.org/animes/berserk/1/4-7081593322405367809-1080p.mp4?big=1" },
-    { id: 5, title: "Bölüm 5: Kılıç Rüzgarı", source: "https://de2---vn-t9g4tsan-5qcl.yeshi.eu.org/animes/berserk/1/5-7081593322405367809-1080p.mp4" },
+    { id: 1, title: "Bölüm 1: Kara Kılıç Ustası", source: "https://zerikai-3.asia/file/tau-video/c66be28b-f127-4770-8bcd-0add9c76d11e.mp4" },
+    { id: 2, title: "Bölüm 2: Şahin Tugayı", source: "https://akumaryu-1.asia/file/tau-video/722bf409-3a6e-4a4a-8b55-94aede819fb9.mp4" },
+    { id: 3, title: "Bölüm 3: İlk Savaş", source: "https://irtau1.online/87c07bfa-3482-4953-ad17-64fcccd182df.mp4" },
+    { id: 4, title: "Bölüm 4: Tanrının Eli", source: "https://irtau1.online/544ad1e8-eb75-4662-949c-0af2137c5534.mp4" },
+    { id: 5, title: "Bölüm 5: Kılıç Rüzgarı", source: "https://irtau1.online/babf21f6-283d-43be-b1c8-89d7d1c3b690.mp4" },
 ];
 
 // Bleach State Management

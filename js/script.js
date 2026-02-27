@@ -15,6 +15,11 @@ const animeDatabase = {
         rating: '8.2',
         pelinRating: 'TBA'
     },
+    'Berserk': {
+        desc: 'Guts, \'Kara Kılıç Ustası\' olarak bilinen eski bir paralı askerdir. İhanete uğradığı eski dostu Griffith ve ona eşlik eden iblislerle dolu bir dünyada intikam arayışına çıkar. Hayatta kalma mücadelesi ve karanlık bir kaderin hikayesi.',
+        rating: '8.7',
+        pelinRating: 'TBA'
+    },
     'Naruto': {
         desc: 'İçinde mühürlenmiş olan Dokuz Kuyruklu Tilki nedeniyle köylüleri tarafından dışlanan genç ninja Naruto Uzumaki\'nin, köyün lideri olan Hokage olma hayalinin ve kendini kanıtlama çabasının hikayesidir.',
         rating: '8.4',
@@ -78,6 +83,15 @@ const animeDatabase = {
 };
 
 
+// Berserk Episodes (5 episodes, 1997 series)
+const berserkEpisodes = [
+    { id: 1, title: "Bölüm 1: Kara Kılıç Ustası", source: "https://de2---vn-t9g4tsan-5qcl.yeshi.eu.org/animes/berserk/1/1-7081593322405367809-1080p.mp4" },
+    { id: 2, title: "Bölüm 2: Şahin Tugayı", source: "https://de2---vn-t9g4tsan-5qcl.yeshi.eu.org/animes/berserk/1/2-7081593322405367809-1080p.mp4" },
+    { id: 3, title: "Bölüm 3: İlk Savaş", source: "https://de2---vn-t9g4tsan-5qcl.yeshi.eu.org/animes/berserk/1/3-7081593322405367809-1080p.mp4" },
+    { id: 4, title: "Bölüm 4: Tanrının Eli", source: "https://de2---vn-t9g4tsan-5qcl.yeshi.eu.org/animes/berserk/1/4-7081593322405367809-1080p.mp4?big=1" },
+    { id: 5, title: "Bölüm 5: Kılıç Rüzgarı", source: "https://de2---vn-t9g4tsan-5qcl.yeshi.eu.org/animes/berserk/1/5-7081593322405367809-1080p.mp4" },
+];
+
 // Bleach State Management
 let bleachCurrentSeason = 1;
 let bleachCurrentRangeStart = 1;
@@ -105,7 +119,7 @@ const bleachEpisodes = [
     { id: 19, title: "Bölüm 19: Ichigo'nun Dönüşümü!", source: "https://yasutorasado.cfd/file/tau-video/208bbc0f-299d-474c-bf59-c8ce8bab4089.mp4", rating: "8.5" },
     { id: 20, title: "Bölüm 20: Ichimaru Gin'in Gölgesi", source: "https://uryuishida.cyou/file/tau-video/b42f67c4-84d1-4176-9800-989d0f0f822f.mp4", rating: "8.2" },
     { id: 21, title: "Bölüm 21: Soul Society'e Giriş", source: "https://zappy-net.shop/file/tau-video/a393c85e-2c4e-474f-9125-a9cc8bc97dda.mp4" },
-    { id: 22, title: "Bölüm 22: Shinigami'den Nefret Eden Adam", source: "" },
+    { id: 22, title: "Bölüm 22: Shinigami'den Nefret Eden Adam", source: "https://do7---ha-k8y3jyfa-8gcx.zyapbot.eu.org/animes/bleach/1/22-7082982286668337153-1080p.mp4" },
     { id: 23, title: "Bölüm 23: Rukia'nın İdamına 14 Gün Kala", source: "" },
     { id: 24, title: "Bölüm 24: Toplanma! 13 Takım", source: "" },
     { id: 25, title: "Bölüm 25: Büyük Bir Patlamayla Merkeze Dalmak?", source: "" },
@@ -487,6 +501,7 @@ const bleachEpisodes = [
 ];
 
 
+const episodeGridBerserk = document.getElementById('episodeGridBerserk');
 const episodeGridBleach = document.getElementById('episodeGridBleach');
 const bleachRangeSelector = document.getElementById('bleachRangeSelector');
 const videoModal = document.getElementById('videoModal');
@@ -500,6 +515,10 @@ const header = document.getElementById('mainHeader');
 const watchlistItems = document.getElementById('watchlistItems');
 let plyrInstance;
 const skipIntroBtn = document.getElementById('skipIntroBtn');
+let currentVideoId = null;
+let currentAnimeName = null;
+let lastSaveTime = 0;
+let isVideoLoaded = false;
 
 // --- Watched Episodes Management ---
 const WATCHED_STORAGE_KEY = 'pelinflix_watched_episodes';
@@ -675,6 +694,11 @@ function renderBleachEpisodes() {
     createEpisodeCards(filtered, episodeGridBleach, "Bleach");
 }
 
+// --- Berserk Specific Functions ---
+function renderBerserkEpisodes() {
+    createEpisodeCards(berserkEpisodes, episodeGridBerserk, 'Berserk');
+}
+
 // --- Watchlist Management ---
 const watchlistData = [
     { title: "Attack on Titan", watched: true },
@@ -713,13 +737,40 @@ function initApp() {
         controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen']
     });
 
-    // Skip Intro Logic
+    // Skip Intro and Resume Playback Logic
     plyrInstance.on('timeupdate', event => {
         const currentTime = plyrInstance.currentTime;
-        if (currentTime > 0 && currentTime < 105) {
+        if (currentTime > 0 && currentTime < 105 && currentAnimeName !== 'Berserk') {
             skipIntroBtn.classList.add('show');
         } else {
             skipIntroBtn.classList.remove('show');
+        }
+
+        // Save progress every 5 seconds
+        if (currentVideoId && currentTime > 0) {
+            if (Math.abs(currentTime - lastSaveTime) > 5) {
+                localStorage.setItem(`video-progress-${currentVideoId}`, currentTime);
+                lastSaveTime = currentTime;
+            }
+        }
+    });
+
+    // Resume logic: Load from localStorage
+    plyrInstance.on('playing', () => {
+        if (currentVideoId && !isVideoLoaded) {
+            const savedTime = localStorage.getItem(`video-progress-${currentVideoId}`);
+            if (savedTime && parseFloat(savedTime) > 0) {
+                plyrInstance.currentTime = parseFloat(savedTime);
+            }
+            isVideoLoaded = true;
+        }
+    });
+
+    // Remove progress on end
+    plyrInstance.on('ended', () => {
+        if (currentVideoId) {
+            localStorage.removeItem(`video-progress-${currentVideoId}`);
+            lastSaveTime = 0;
         }
     });
 
@@ -730,6 +781,7 @@ function initApp() {
 
     renderBleachControls();
     renderBleachEpisodes();
+    renderBerserkEpisodes();
 
     watchlistItems.innerHTML = '';
     watchlistData.forEach(item => {
@@ -786,6 +838,11 @@ function showAnimeInfo(name) {
 }
 
 function openVideo(url, epTitle, animeName, episodeId) {
+    currentVideoId = `${animeName}-ep-${episodeId}`;
+    currentAnimeName = animeName;
+    isVideoLoaded = false;
+    lastSaveTime = 0;
+
     playerEpTitle.textContent = epTitle;
     document.getElementById('playerAnimeName').textContent = animeName.toUpperCase();
 

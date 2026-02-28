@@ -85,11 +85,11 @@ const animeDatabase = {
 
 // Berserk Episodes (5 episodes, 1997 series)
 const berserkEpisodes = [
-    { id: 1, title: "Bölüm 1: Kara Kılıç Ustası", source: "https://zerikai-3.asia/file/tau-video/c66be28b-f127-4770-8bcd-0add9c76d11e.mp4" },
-    { id: 2, title: "Bölüm 2: Şahin Tugayı", source: "https://akumaryu-1.asia/file/tau-video/722bf409-3a6e-4a4a-8b55-94aede819fb9.mp4" },
-    { id: 3, title: "Bölüm 3: İlk Savaş", source: "https://irtau1.online/87c07bfa-3482-4953-ad17-64fcccd182df.mp4" },
-    { id: 4, title: "Bölüm 4: Tanrının Eli", source: "https://irtau1.online/544ad1e8-eb75-4662-949c-0af2137c5534.mp4" },
-    { id: 5, title: "Bölüm 5: Kılıç Rüzgarı", source: "https://irtau1.online/babf21f6-283d-43be-b1c8-89d7d1c3b690.mp4" },
+    { id: 1, title: "Bölüm 1: Kara Kılıç Ustası", source: "https://akumaryu-2.asia/file/tau-video/7791_1_1_720p.mp4" },
+    { id: 2, title: "Bölüm 2: Şahin Tugayı", source: "https://arukane-4.asia/file/tau-video/7791_1_2_720p.mp4" },
+    { id: 3, title: "Bölüm 3: İlk Savaş", source: "https://inorix-2.asia/file/tau-video/7791_1_3_720p.mp4" },
+    { id: 4, title: "Bölüm 4: Tanrının Eli", source: "https://akumaryu-2.asia/file/tau-video/7791_1_4_720p.mp4" },
+    { id: 5, title: "Bölüm 5: Kılıç Rüzgarı", source: "https://kitsurai-3.asia/file/tau-video/7791_1_5_720p.mp4" },
 ];
 
 // Bleach State Management
@@ -119,7 +119,7 @@ const bleachEpisodes = [
     { id: 19, title: "Bölüm 19: Ichigo'nun Dönüşümü!", source: "https://yasutorasado.cfd/file/tau-video/208bbc0f-299d-474c-bf59-c8ce8bab4089.mp4", rating: "8.5" },
     { id: 20, title: "Bölüm 20: Ichimaru Gin'in Gölgesi", source: "https://uryuishida.cyou/file/tau-video/b42f67c4-84d1-4176-9800-989d0f0f822f.mp4", rating: "8.2" },
     { id: 21, title: "Bölüm 21: Soul Society'e Giriş", source: "https://zappy-net.shop/file/tau-video/a393c85e-2c4e-474f-9125-a9cc8bc97dda.mp4" },
-    { id: 22, title: "Bölüm 22: Shinigami'den Nefret Eden Adam", source: "https://do7---ha-k8y3jyfa-8gcx.zyapbot.eu.org/animes/bleach/1/22-7082982286668337153-1080p.mp4" },
+    { id: 22, title: "Bölüm 22: Shinigami'den Nefret Eden Adam", source: "" },
     { id: 23, title: "Bölüm 23: Rukia'nın İdamına 14 Gün Kala", source: "" },
     { id: 24, title: "Bölüm 24: Toplanma! 13 Takım", source: "" },
     { id: 25, title: "Bölüm 25: Büyük Bir Patlamayla Merkeze Dalmak?", source: "" },
